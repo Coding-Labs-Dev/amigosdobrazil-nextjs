@@ -1,0 +1,96 @@
+{
+  "heroes": [
+    {
+      "background": "/images/hero.jpg",
+      "position": "center center",
+      "opacity": 0.3
+    }
+  ],
+  "nexttrips": [
+    {
+      "slug": "africa-do-sul-2020",
+      "name": "África do Sul",
+      "date": "Março/2020",
+      "background": {
+        "position": "center",
+        "image": "images/cape-town.jpg"
+      }
+    },
+    {
+      "slug": "china-2020",
+      "name": "China",
+      "date": "Julho/2020",
+      "background": {
+        "position": "center",
+        "image": "images/china.jpg"
+      }
+    },
+    {
+      "slug": "india-2020",
+      "name": "Índia",
+      "date": "Novembro/2020",
+      "background": {
+        "position": "center",
+        "image": "images/india.jpg"
+      }
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "url": "https://www.youtube.com/watch?v=BEUGQ7xXoSY",
+      "poster": true
+    },
+    {
+      "id": 2,
+      "url": "https://www.youtube.com/watch?v=BEUGQ7xXoSY",
+      "poster": "videos/video02.jpg"
+    },
+    {
+      "id": 3,
+      "url": "https://www.youtube.com/watch?v=BEUGQ7xXoSY",
+      "poster": "videos/video03.jpg"
+    }
+  ],
+  "whyus": [
+    {
+      "title": "Transporte Aéreo",
+      "text": "Os nossos pacotes já incluem a passagem aérea e as taxas de embarque, gerando inclusive milhas aéreas!"
+    },
+    {
+      "title": "Transporte Terrestre",
+      "text": "Assim como o transporte aéreo, todos os translados entre os aeroportos, hotéis e passeios, estão inclusos!"
+    },
+    {
+      "title": "Hospedagem",
+      "text": "Os nossos roteiros possuem hospedagem em hoteis 4 e 5 estrelas e com café-da-manhã incluso!"
+    },
+    {
+      "title": "Passeios Exclusivos",
+      "text": "Passeios exlcusivos inclusos conforme o roteiro de viagem, todos acompanhados de guias locais!"
+    }
+  ],
+  "contact": [
+    {
+      "name": "adajsiodsaio",
+      "email": "ioajsdio@aijidos.com",
+      "subject": "oaijdioajsdoi",
+      "message": "oiasjdoiajdo ijo oidadasdasd",
+      "id": 1
+    },
+    {
+      "name": "luisramirez",
+      "email": "luismramirezr@me.com",
+      "subject": "Assunto ",
+      "message": "Está é uma mensagem de teste para o site",
+      "id": 2
+    },
+    {
+      "name": "asadada",
+      "email": "asd@ads.com",
+      "subject": "aoijdoiajdiosoiajsoidjas iodja",
+      "message": "jasoidjasoidjasio jdasioj doiaj doisaj ioajio js",
+      "id": 3
+    }
+  ]
+}
