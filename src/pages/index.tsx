@@ -14,7 +14,13 @@ import {
 import { Props } from '~/types';
 import api from '~/services/api';
 
-const index: NextPage<Props> = ({ heroes, nextTrips, whyUs, testimonials }) => {
+const index: NextPage<Props> = ({
+  heroes,
+  nextTrips,
+  whyUs,
+  testimonials,
+  settings,
+}) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [opacity, setOpacity] = useState(0);
 
@@ -37,11 +43,11 @@ const index: NextPage<Props> = ({ heroes, nextTrips, whyUs, testimonials }) => {
     <>
       <Navigation position="fixed" opacity={opacity} />
       <Hero heroes={heroes} forwardRef={heroRef} />
-      <NextTrips nextTrips={nextTrips} />
+      {!!nextTrips.length && <NextTrips nextTrips={nextTrips} />}
       {!!whyUs.length && <WhyUs whyUs={whyUs} />}
       <Gradient>
         {!!testimonials.length && <Testimonials testimonials={testimonials} />}
-        <ContactUs />
+        <ContactUs settings={settings} />
       </Gradient>
     </>
   );
@@ -52,7 +58,8 @@ index.getInitialProps = async () => {
   const { data: nextTrips } = await api.get('/nexttrips');
   const { data: whyUs } = await api.get('/whyus');
   const { data: testimonials } = await api.get('/testimonials');
-  return { heroes, nextTrips, whyUs, testimonials };
+  const { data: settings } = await api.get('/settings');
+  return { heroes, nextTrips, whyUs, testimonials, settings };
 };
 
 export default index;

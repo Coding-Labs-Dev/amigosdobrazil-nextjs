@@ -14,6 +14,8 @@ import {
   FaRegEnvelope,
 } from 'react-icons/fa';
 
+import { Props } from './ContactUs';
+
 import Input from '../Input';
 import Loader from '../Loader';
 
@@ -41,7 +43,7 @@ const formSchema = yup.object().shape({
     .required('Por favor, digite a mensagem'),
 });
 
-const ContactUs = () => {
+const ContactUs: React.FC<Props> = ({ settings }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
@@ -51,7 +53,7 @@ const ContactUs = () => {
   const onSubmit = methods.handleSubmit(async data => {
     setIsSending(true);
     try {
-      const result = await api.post('/contact', data);
+      const result = await api.post('/formcontacts', data);
       setIsSubmitted(true);
       setIsSending(false);
     } catch (err) {
@@ -77,22 +79,24 @@ const ContactUs = () => {
                   <li>
                     <FaMapPin size={24} />
                     <p>
-                      <span>Avenida Liberdade, 21, Sala 1307</span>
-                      <span>Bairro Liberdade, São Paulo, SP</span>
-                      <span>CEP: 01503-000</span>
+                      <span>{settings.street}</span>
+                      <span>
+                        {settings.neigh}, {settings.city}, {settings.state}
+                      </span>
+                      <span>CEP: {settings.zip}</span>
                     </p>
                   </li>
                   <li>
                     <FaPhone size={24} />
                     <p>
-                      <span>(11) 5573-6999</span>
-                      <span>(11) 98111-9180</span>
+                      <span>{settings.mainPhone}</span>
+                      {settings.altPhone && <span>{settings.altPhone}</span>}
                     </p>
                   </li>
                   <li>
                     <FaRegEnvelope size={24} />
                     <p>
-                      <span>pauloamerico@naturalmed.com.br</span>
+                      <span>{settings.email}</span>
                     </p>
                   </li>
                 </ul>

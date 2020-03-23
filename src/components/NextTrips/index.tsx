@@ -37,11 +37,13 @@ const NextTrips: React.FC<Props> = ({ nextTrips }) => {
                       <CardImg
                         width="100%"
                         src={nextTrip.background.image}
-                        alt="China"
+                        alt={nextTrip.title}
                       />
                       <CardImgOverlay>
                         <Container className="h-100">
-                          <CardTitle className="m-0">{nextTrip.name}</CardTitle>
+                          <CardTitle className="m-0">
+                            {nextTrip.title}
+                          </CardTitle>
                           <CardText>{nextTrip.date}</CardText>
                         </Container>
                       </CardImgOverlay>

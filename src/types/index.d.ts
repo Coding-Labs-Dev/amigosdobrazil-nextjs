@@ -9,4 +9,17 @@ export interface Props {
   nextTrips: NextTrip[];
   whyUs: WhyUs[];
   testimonials: Testimonial[];
+  settings: Settings;
+}
+
+export interface Settings {
+  readonly name: string;
+  readonly email: string;
+  readonly street: string;
+  readonly neigh: string;
+  readonly city: string;
+  readonly state: string;
+  readonly zip: string;
+  readonly mainPhone: string;
+  readonly altPhone?: string;
 }

@@ -10,9 +10,9 @@ const Hero: React.FC<Props> = ({ heroes, forwardRef }) => {
       <Banner
         body
         inverse
-        background={heroes[0].background}
-        position={heroes[0].position}
-        opacity={heroes[0].opacity}
+        background={heroes[0]?.background || 'images/hero.jpg'}
+        position={heroes[0]?.position || 'center center'}
+        opacity={heroes[0]?.opacity || 0.8}
       >
         <Container className="h-100">
           <Row className="h-100 align-items-center">

@@ -4,7 +4,7 @@ export interface Props {
 
 export interface NextTrip {
   slug: string;
-  name: string;
+  title: string;
   date: string;
   background: {
     position: string;
