@@ -1,23 +1,30 @@
 import styled from 'styled-components';
 import { Card } from 'reactstrap';
 
-import { HeroData } from './Hero';
+import { BackgroundData } from './Banner';
 
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
-  max-height: 640px;
+  min-height: 640px;
+  max-height: 100%;
   display: flex;
   justify-content: center;
   align-items: stretch;
+
+  @supports (-webkit-text-stroke: 1px white) {
+    h1 {
+      -webkit-text-stroke: 1px white;
+      -webkit-text-fill-color: transparent;
+    }
+  }
 `;
 
-export const Banner = styled(Card)<HeroData>`
+export const Banner = styled(Card)<BackgroundData>`
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: ${props => props.position};
-  background-image: ${props => `url(${props.background})`};
+  background-position: ${props => props.background.position};
+  background-image: ${props => `url(${props.background.image})`};
   border: none !important;
   border-radius: 0 !important;
   &::before {
@@ -28,10 +35,6 @@ export const Banner = styled(Card)<HeroData>`
     right: 0;
     bottom: 0;
     background: ${props => props.theme.colors.gray900};
-    opacity: ${props => props.opacity};
+    opacity: ${props => props.background.opacity || 0.5};
   }
 `;
-
-Banner.defaultProps = {
-  position: 'center',
-};

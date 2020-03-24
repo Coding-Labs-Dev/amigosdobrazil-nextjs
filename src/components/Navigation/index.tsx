@@ -32,7 +32,7 @@ const Navigation: React.FC<Props> = ({ opacity = 1, position = 'sticky' }) => {
       <Container>
         <NavbarBrand href="/">
           <img
-            src="logo.png"
+            src="/logo.png"
             alt="Amigos do Brazil"
             style={{ maxHeight: 48 }}
           />
