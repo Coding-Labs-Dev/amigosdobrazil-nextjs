@@ -20,6 +20,10 @@ export const Wrapper = styled.div`
     }
 
     li {
+      cursor: pointer;
+      * {
+        cursor: pointer;
+      }
       /* Timeline item circle marker */
       &:before {
         content: ' ';

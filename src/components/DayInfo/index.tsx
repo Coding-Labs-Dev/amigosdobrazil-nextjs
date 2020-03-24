@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import { Collapse, CardBody, Card, Container, Row, Col } from 'reactstrap';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
@@ -10,14 +10,16 @@ const getClassName = (
   event: 'opening' | 'open' | 'closing' | 'closed'
 ): string => `${event} text-dark`;
 
+import { DayContext } from '../Trip';
+
 const DayInfo: React.FC<Props> = ({ title, description, i }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { value, setValue } = useContext(DayContext);
 
   return (
     <Wrapper>
       <Card
         className="py-2 my-2 shadow-sm border-0"
-        onClick={() => setIsOpen(p => !p)}
+        onClick={() => setValue && setValue(value === i ? 0 : i)}
       >
         <Container>
           <Row>
@@ -27,7 +29,7 @@ const DayInfo: React.FC<Props> = ({ title, description, i }) => {
               </span>
             </Col>
             <Col xs={2} className="pl-2">
-              {isOpen ? (
+              {value === i ? (
                 <FaChevronUp size={16} className="text-dark" />
               ) : (
                 <FaChevronDown size={16} className="text-dark" />
@@ -35,7 +37,7 @@ const DayInfo: React.FC<Props> = ({ title, description, i }) => {
             </Col>
           </Row>
         </Container>
-        <Collapse isOpen={isOpen}>
+        <Collapse isOpen={value === i}>
           <CardBody>{description}</CardBody>
         </Collapse>
       </Card>
