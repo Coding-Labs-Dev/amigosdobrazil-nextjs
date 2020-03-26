@@ -10,4 +10,12 @@ export interface Props {
     mainDestination: boolean;
     mainDestinationTitle: string;
   }[];
+  paymentPlans: {
+    date: Date;
+    usd: string;
+    brl: string;
+    downPayment: string;
+    installmentsQty: number;
+    installmentsValue: string;
+  }[];
 }

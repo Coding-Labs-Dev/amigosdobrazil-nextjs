@@ -12,24 +12,24 @@ const getClassName = (
 
 import { DayContext } from '../Trip';
 
-const DayInfo: React.FC<Props> = ({ title, description, i }) => {
+const DayInfo: React.FC<Props> = ({ title, description, order }) => {
   const { value, setValue } = useContext(DayContext);
 
   return (
     <Wrapper>
       <Card
         className="py-2 my-2 shadow-sm border-0"
-        onClick={() => setValue && setValue(value === i ? 0 : i)}
+        onClick={() => setValue && setValue(value === order ? 0 : order)}
       >
         <Container>
           <Row>
             <Col className="text-left pr-0" xs={10}>
               <span className="font-weight-bold text-left">
-                Dia {i} - {title}
+                Dia {order} - {title}
               </span>
             </Col>
             <Col xs={2} className="pl-2">
-              {value === i ? (
+              {value === order ? (
                 <FaChevronUp size={16} className="text-dark" />
               ) : (
                 <FaChevronDown size={16} className="text-dark" />
@@ -37,7 +37,7 @@ const DayInfo: React.FC<Props> = ({ title, description, i }) => {
             </Col>
           </Row>
         </Container>
-        <Collapse isOpen={value === i}>
+        <Collapse isOpen={value === order}>
           <CardBody>{description}</CardBody>
         </Collapse>
       </Card>

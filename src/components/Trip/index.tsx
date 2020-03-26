@@ -36,7 +36,8 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
           <Row>
             <Col
               xs={12}
-              md={8}
+              md={7}
+              lg={8}
               className="text-center justify-content-center px-0"
             >
               <TripInfoCard
@@ -48,9 +49,15 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
               <Itinerary
                 description={trip.description}
                 itinerary={trip.itinerary}
+                paymentPlans={trip.paymentPlans}
               />
             </Col>
-            <Col xs={12} md={4} className="text-center justify-content-center">
+            <Col
+              xs={12}
+              md={5}
+              lg={4}
+              className="text-center justify-content-center"
+            >
               <TripSideBar
                 includes={includes}
                 documents={documents}

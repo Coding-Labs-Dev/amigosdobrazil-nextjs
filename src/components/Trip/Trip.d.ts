@@ -35,6 +35,14 @@ export interface Trip {
     mainDestination: boolean;
     mainDestinationTitle: string;
   }[];
+  paymentPlans: {
+    date: Date;
+    usd: string;
+    brl: string;
+    downPayment: string;
+    installmentsQty: number;
+    installmentsValue: string;
+  }[];
 }
 
 export interface Props {
