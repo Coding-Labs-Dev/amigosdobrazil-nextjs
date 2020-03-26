@@ -13,15 +13,27 @@ import TripSideBar from '../TripSideBar';
 const ctx: {
   value: number | null;
   setValue: Dispatch<SetStateAction<number>> | null;
+  refs: {
+    [key: number]: HTMLDivElement;
+  } | null;
+  setRefs: ((key: number, ref: HTMLDivElement) => void) | null;
 } = {
   value: null,
   setValue: null,
+  refs: null,
+  setRefs: null,
 };
 
 export const DayContext = React.createContext(ctx);
 
 const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
   const [openDay, setOpenDay] = useState(0);
+  const refs = {} as { [key: number]: HTMLDivElement };
+
+  const setRefs = (key: number, ref: HTMLDivElement): void => {
+    refs[key] = ref;
+  };
+
   return (
     <Wrapper>
       <TripBanner
@@ -31,7 +43,9 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
         titlePosition={trip.titlePosition}
         forwardRef={fowardRef}
       />
-      <DayContext.Provider value={{ value: openDay, setValue: setOpenDay }}>
+      <DayContext.Provider
+        value={{ value: openDay, setValue: setOpenDay, refs, setRefs }}
+      >
         <Container>
           <Row>
             <Col

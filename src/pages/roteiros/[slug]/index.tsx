@@ -27,7 +27,6 @@ const index: NextPage<Props> = ({ trip }) => {
 
   return (
     <>
-      {/* <Hero heroes={heroes} forwardRef={heroRef} /> */}
       <Navigation position="fixed" opacity={opacity} />
       <Trip
         trip={trip}
@@ -42,7 +41,6 @@ const index: NextPage<Props> = ({ trip }) => {
 
 index.getInitialProps = async ({ query }) => {
   const { data: trip } = await api.get(`/trips/${query.slug}`);
-  console.log(trip.title, query.slug);
   return { trip };
 };
 

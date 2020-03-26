@@ -5,8 +5,21 @@ import { Props } from './Timeline';
 import { Wrapper } from './styles';
 import { DayContext } from '../Trip';
 
+const scroll = (
+  refs: {
+    [key: number]: HTMLDivElement;
+  } | null,
+  order: number
+): void => {
+  if (refs && refs[order])
+    refs[order].scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+};
+
 const Timeline: React.FC<Props> = ({ mainDestinations }) => {
-  const { value, setValue } = useContext(DayContext);
+  const { value, setValue, refs } = useContext(DayContext);
   return (
     <Wrapper>
       <ul className="timeline">
@@ -16,7 +29,10 @@ const Timeline: React.FC<Props> = ({ mainDestinations }) => {
             className={`ml-4 my-4 ${
               value === destination.order ? 'active' : ''
             }`}
-            onClick={() => setValue && setValue(destination.order)}
+            onClick={() => {
+              if (setValue) setValue(destination.order);
+              scroll(refs, destination.order);
+            }}
           >
             <h6 className="font-weight-bold text-left my-0 py-0">
               {destination.mainDestinationTitle}

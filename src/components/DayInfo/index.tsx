@@ -13,10 +13,14 @@ const getClassName = (
 import { DayContext } from '../Trip';
 
 const DayInfo: React.FC<Props> = ({ title, description, order }) => {
-  const { value, setValue } = useContext(DayContext);
+  let { value, setValue, setRefs, refs } = useContext(DayContext);
 
   return (
-    <Wrapper>
+    <Wrapper
+      ref={(ref: HTMLDivElement) => {
+        if (ref && setRefs && refs) setRefs(order, ref);
+      }}
+    >
       <Card
         className="py-2 my-2 shadow-sm border-0"
         onClick={() => setValue && setValue(value === order ? 0 : order)}
