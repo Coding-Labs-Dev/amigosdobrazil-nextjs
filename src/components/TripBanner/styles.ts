@@ -24,7 +24,7 @@ export const Banner = styled(Card)<BackgroundData>`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: ${props => props.background.position};
-  background-image: ${props => `url(${props.background.image})`};
+  background-image: ${props => `url(${props.background.url})`};
   border: none !important;
   border-radius: 0 !important;
   &::before {
@@ -35,6 +35,6 @@ export const Banner = styled(Card)<BackgroundData>`
     right: 0;
     bottom: 0;
     background: ${props => props.theme.colors.gray900};
-    opacity: ${props => props.background.opacity || 0.5};
+    opacity: ${props => Number(props.background.opacity) || 0.5};
   }
 `;

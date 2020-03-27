@@ -3,9 +3,9 @@ export interface Trip {
   featured: boolean;
   title: string;
   subTitle: string;
-  background: {
-    image: string;
-    opacity: number;
+  banner: {
+    url: string;
+    opacity: string;
     position:
       | 'left top'
       | 'left center'

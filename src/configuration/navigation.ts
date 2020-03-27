@@ -30,5 +30,3 @@ export const MainNavigation = [
     path: '/contato',
   },
 ];
-
-export const FooterNaviation = [];

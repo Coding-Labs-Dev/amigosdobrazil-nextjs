@@ -36,7 +36,7 @@ const NextTrips: React.FC<Props> = ({ nextTrips }) => {
                     <Card className="inverse shadow border-0">
                       <CardImg
                         width="100%"
-                        src={nextTrip.background.image}
+                        src={nextTrip.background}
                         alt={nextTrip.title}
                       />
                       <CardImgOverlay>

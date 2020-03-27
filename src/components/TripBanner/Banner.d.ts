@@ -1,6 +1,6 @@
 export type BackgroundData = {
-  image: string;
-  opacity: number;
+  url: string;
+  opacity: string;
   position:
     | 'left top'
     | 'left center'

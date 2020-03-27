@@ -6,8 +6,5 @@ export interface NextTrip {
   slug: string;
   title: string;
   date: string;
-  background: {
-    position: string;
-    image: string;
-  };
+  background: string;
 }

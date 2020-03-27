@@ -37,7 +37,7 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
   return (
     <Wrapper>
       <TripBanner
-        background={trip.background}
+        background={trip.banner}
         title={trip.title}
         subTitle={trip.subTitle}
         titlePosition={trip.titlePosition}
