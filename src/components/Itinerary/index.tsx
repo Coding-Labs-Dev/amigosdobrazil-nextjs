@@ -6,14 +6,8 @@ import { Props } from './Itinerary';
 
 import { Wrapper } from './styles';
 import DayInfo from '../DayInfo';
-import PaymentPlans from '../PaymentPlans';
 
-const Itinerary: React.FC<Props> = ({
-  description,
-  itinerary,
-  paymentPlans,
-  slug,
-}) => (
+const Itinerary: React.FC<Props> = ({ description, itinerary, slug }) => (
   <Wrapper>
     <Container>
       <Card className="pt-5 pb-3 px-4 px-md-5 shadow border-0">
@@ -35,19 +29,6 @@ const Itinerary: React.FC<Props> = ({
               ))}
             </>
           )}
-          {!!paymentPlans.length && (
-            <PaymentPlans paymentPlans={paymentPlans} />
-          )}
-          <Row className="px-3">
-            <Link
-              href="/roteiros/[slug]/reservar"
-              as={`/roteiros/${slug}/reservar`}
-            >
-              <Button color="warning" className="ml-auto text-uppercase mt-2">
-                Reservar
-              </Button>
-            </Link>
-          </Row>
         </CardBody>
       </Card>
     </Container>

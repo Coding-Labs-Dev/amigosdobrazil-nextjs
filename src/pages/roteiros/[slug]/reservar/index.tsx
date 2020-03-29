@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { useForm, FormContext } from 'react-hook-form';
@@ -25,8 +26,8 @@ import {
   commercialAddress,
 } from '~/configuration/checkoutFields';
 
-import { Props } from './Reservar';
-import { Wrapper } from './styles';
+import { Props } from '~/types/Reservar';
+import { Wrapper } from '~/styles/styled/reservar_styles';
 
 import {
   Gradient,

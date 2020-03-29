@@ -36,6 +36,7 @@ export interface Trip {
     mainDestinationTitle: string;
   }[];
   paymentPlans: {
+    id: string;
     date: Date;
     usd: string;
     brl: string;

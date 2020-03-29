@@ -50,7 +50,7 @@ const Navigation: React.FC<Props> = ({
           <Nav className="w-100 justify-content-end flex-column flex-lg-row text-center">
             {MainNavigation.map(item => {
               return (
-                <NavItem key={item.path}>
+                <NavItem key={`${item.baseURL}_${item.path}`}>
                   {item.baseURL === pathname ? (
                     <AnchorLink
                       href={`#${item.path}`}
@@ -60,7 +60,11 @@ const Navigation: React.FC<Props> = ({
                       {item.label}
                     </AnchorLink>
                   ) : (
-                    <NavLink href={`${item.baseURL}#${item.path}`}>
+                    <NavLink
+                      href={`${item.baseURL}${
+                        !!item.path ? `#${item.path}` : ''
+                      }`}
+                    >
                       {item.label}
                     </NavLink>
                   )}
@@ -72,7 +76,7 @@ const Navigation: React.FC<Props> = ({
                 href="/roteiros/[slug]/reservar"
                 as={`/roteiros/${slug}/reservar`}
               >
-                <Button color="warning" className="ml-auto text-uppercase mt-2">
+                <Button color="warning" className="my-auto text-uppercase mt-2">
                   Reservar
                 </Button>
               </Link>

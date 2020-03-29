@@ -1,5 +1,7 @@
 export interface Props {
+  slug: string;
   paymentPlans: {
+    id: string;
     date: Date;
     usd: string;
     brl: string;
@@ -7,4 +9,5 @@ export interface Props {
     installmentsQty: number;
     installmentsValue: string;
   }[];
+  display?: 'xs' | 'md';
 }

@@ -9,11 +9,11 @@ export const MainNavigation = [
   //   baseURL: '/quemsomos',
   //   path: '/quemsomos',
   // },
-  // {
-  //   label: 'Roteiros',
-  //   baseURL: '/roteiros',
-  //   path: '/roteiros',
-  // },
+  {
+    label: 'Roteiros',
+    baseURL: '/roteiros',
+    path: 'roteiros',
+  },
   // {
   //   label: 'Galeria',
   //   baseURL: '/galeria',

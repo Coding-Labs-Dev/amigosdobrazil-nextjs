@@ -1,5 +1,14 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import Link from 'next/link';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Button,
+  CardTitle,
+} from 'reactstrap';
 
 import { Props } from './Trip';
 
@@ -8,6 +17,7 @@ import TripBanner from '../TripBanner';
 import TripInfoCard from '../TripInfoCard';
 import Itinerary from '../Itinerary';
 import TripSideBar from '../TripSideBar';
+import PaymentPlans from '../PaymentPlans';
 
 const ctx: {
   value: number | null;
@@ -62,9 +72,15 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
               <Itinerary
                 description={trip.description}
                 itinerary={trip.itinerary}
-                paymentPlans={trip.paymentPlans}
                 slug={trip.slug}
               />
+              {!!trip.paymentPlans.length && (
+                <PaymentPlans
+                  paymentPlans={trip.paymentPlans}
+                  slug={trip.slug}
+                  display="md"
+                />
+              )}
             </Col>
             <Col
               xs={12}
@@ -77,6 +93,12 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
                 documents={documents}
                 itinerary={trip.itinerary}
               />
+              {!!trip.paymentPlans.length && (
+                <PaymentPlans
+                  paymentPlans={trip.paymentPlans}
+                  slug={trip.slug}
+                />
+              )}
             </Col>
           </Row>
         </Container>

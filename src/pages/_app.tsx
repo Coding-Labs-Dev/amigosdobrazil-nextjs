@@ -8,13 +8,8 @@ import { Footer } from '~/components';
 
 import { light } from '~/styles/themes';
 import GlobalStyles from '~/styles/global';
-import { Store } from 'redux';
 
-interface Props {
-  store: Store;
-}
-
-export default class MyApp extends App<Props> {
+export default class MyApp extends App {
   static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {};
 

@@ -13,15 +13,15 @@ import {
 
 import api from '~/services/api';
 
-import { Props } from './roteiros';
-import { Wrapper, Banner } from './styles';
+import { Props } from '~/types/roteiros';
+import { Wrapper, Banner } from '~/styles/styled/roteiros_styles';
 import { Gradient, TripInfoCard, Navigation } from '~/components';
 
 const roteiros: NextPage<Props> = ({ trips, pathname }) => (
   <Wrapper>
     <Navigation pathname={pathname} position="fixed" />
     <Gradient>
-      <Container className="py-5">
+      <Container className="py-5" id="roteiros">
         <Card className="px-0 px-md-5 pb-5 border-0">
           <h1 className="text-dark pb-2 px-4 px-md-0">Nossos Roteiros</h1>
           <Row>
