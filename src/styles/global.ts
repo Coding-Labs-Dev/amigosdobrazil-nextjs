@@ -59,14 +59,7 @@ export default createGlobalStyle`
     color: #FFFFFF;
   }
 
-  h2 {
-    font-family: Montserrat, sans-serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #FFFFFF;
-    letter-spacing: 0.0625rem;
-    text-align: center;
-  }
+
 
   h3 {
     font-family: Montserrat, sans-serif;

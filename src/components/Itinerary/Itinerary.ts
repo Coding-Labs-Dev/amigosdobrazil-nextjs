@@ -18,4 +18,5 @@ export interface Props {
     installmentsQty: number;
     installmentsValue: string;
   }[];
+  slug: string;
 }

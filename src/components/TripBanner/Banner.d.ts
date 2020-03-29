@@ -14,8 +14,8 @@ export type BackgroundData = {
 };
 export interface Props {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   titlePosition: 'top' | 'center' | 'bottom';
   background: BackgroundData;
-  forwardRef: React.fowardRef;
+  forwardRef?: React.fowardRef;
 }

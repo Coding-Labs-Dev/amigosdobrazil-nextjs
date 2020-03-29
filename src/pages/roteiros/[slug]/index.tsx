@@ -27,7 +27,7 @@ const index: NextPage<Props> = ({ trip }) => {
 
   return (
     <>
-      <Navigation position="fixed" opacity={opacity} />
+      <Navigation position="fixed" opacity={opacity} slug={trip.slug} />
       <Trip
         trip={trip}
         fowardRef={heroRef}

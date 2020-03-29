@@ -28,9 +28,11 @@ const TripBanner: React.FC<Props> = ({
                   {title}
                 </h1>
               </CardTitle>
-              <div className="text-center my-0 py-0">
-                <h5 className="py-0 my-0">{subTitle}</h5>
-              </div>
+              {subTitle && (
+                <div className="text-center my-0 py-0">
+                  <h5 className="py-0 my-0">{subTitle}</h5>
+                </div>
+              )}
             </Col>
           </Row>
         </Container>

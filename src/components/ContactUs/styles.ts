@@ -4,7 +4,7 @@ import { Container } from 'reactstrap';
 export const Wrapper = styled(Container)`
   .gradient {
     background: linear-gradient(135deg, #c8c7f9 0%, #fbc7d4 100%);
-    @media screen and (min-width: 786px) {
+    @media screen and (min-width: 992px) {
       z-index: 1;
     }
   }
@@ -12,7 +12,7 @@ export const Wrapper = styled(Container)`
     padding-left: 3rem;
     padding-right: 3rem;
     transition: all 0.75s ease-in-out;
-    @media screen and (min-width: 786px) {
+    @media screen and (min-width: 992px) {
       margin-left: -4rem;
       margin-top: 4rem;
       padding-left: 5.5rem;

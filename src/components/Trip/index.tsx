@@ -1,5 +1,4 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
-
 import { Container, Row, Col } from 'reactstrap';
 
 import { Props } from './Trip';
@@ -64,6 +63,7 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
                 description={trip.description}
                 itinerary={trip.itinerary}
                 paymentPlans={trip.paymentPlans}
+                slug={trip.slug}
               />
             </Col>
             <Col

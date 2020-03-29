@@ -65,7 +65,7 @@ const ContactUs: React.FC<Props> = ({ settings }) => {
     <Wrapper fluid className="py-5">
       <Container>
         <Row>
-          <Col xs={12} md={7} lg={5} className="px-0 py-2">
+          <Col xs={12} lg={5} className="px-0 py-2">
             <Card className="border-0 px-5 pb-4 shadow-lg gradient">
               <CardTitle>
                 <h1 className="text-dark pt-5 pb-2">Contato</h1>
@@ -103,7 +103,7 @@ const ContactUs: React.FC<Props> = ({ settings }) => {
               </Info>
             </Card>
           </Col>
-          <Col xs={12} md={5} lg={7} className="px-0 py-2">
+          <Col xs={12} lg={7} className="px-0 py-2">
             <Card className="contact-form h-100 pb-4 border-0 shadow">
               {isSending && <Loader />}
               <CardTitle>

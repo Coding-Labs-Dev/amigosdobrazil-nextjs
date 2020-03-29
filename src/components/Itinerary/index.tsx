@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Link from 'next/link';
 import { Container, Card, CardTitle, Button, CardBody, Row } from 'reactstrap';
 
 import { Props } from './Itinerary';
@@ -12,6 +12,7 @@ const Itinerary: React.FC<Props> = ({
   description,
   itinerary,
   paymentPlans,
+  slug,
 }) => (
   <Wrapper>
     <Container>
@@ -38,9 +39,14 @@ const Itinerary: React.FC<Props> = ({
             <PaymentPlans paymentPlans={paymentPlans} />
           )}
           <Row className="px-3">
-            <Button color="warning" className="ml-auto text-uppercase mt-2">
-              Reservar
-            </Button>
+            <Link
+              href="/roteiros/[slug]/reservar"
+              as={`/roteiros/${slug}/reservar`}
+            >
+              <Button color="warning" className="ml-auto text-uppercase mt-2">
+                Reservar
+              </Button>
+            </Link>
           </Row>
         </CardBody>
       </Card>

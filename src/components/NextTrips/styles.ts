@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: stretch;
+  cursor: pointer;
 
   .card {
     transition: all 1s ease-in-out;

@@ -28,6 +28,7 @@ export const Container = styled.div`
   height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 0.8);
+  z-index: 1;
 
   .react-spinner-loader-svg-calLoader {
     width: 230px;

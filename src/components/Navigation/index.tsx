@@ -18,7 +18,11 @@ import { Props } from './Navigation';
 import { Navbar } from './styles';
 import { FaBars } from 'react-icons/fa';
 
-const Navigation: React.FC<Props> = ({ opacity = 1, position = 'sticky' }) => {
+const Navigation: React.FC<Props> = ({
+  opacity = 1,
+  position = 'sticky',
+  slug,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(p => !p);
 
@@ -49,11 +53,22 @@ const Navigation: React.FC<Props> = ({ opacity = 1, position = 'sticky' }) => {
                 </NavLink>
               </NavItem>
             ))}
-            <Link href="/reservar">
-              <Button color="warning" className="text-uppercase mx-4">
-                Reservar
-              </Button>
-            </Link>
+            {slug ? (
+              <Link
+                href="/roteiros/[slug]/reservar"
+                as={`/roteiros/${slug}/reservar`}
+              >
+                <Button color="warning" className="ml-auto text-uppercase mt-2">
+                  Reservar
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/reservar">
+                <Button color="warning" className="text-uppercase mx-4">
+                  Reservar
+                </Button>
+              </Link>
+            )}
           </Nav>
         </Collapse>
       </Container>
