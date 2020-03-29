@@ -6,6 +6,7 @@ export { default as Testimonials } from './Testimonials';
 export { default as ContactUs } from './ContactUs';
 
 export { default as Trip } from './Trip';
+export { default as TripInfoCard } from './TripInfoCard';
 export { default as TripBanner } from './TripBanner';
 export { default as CreditCardCheckout } from './CreditCardCheckout';
 export { default as TOS } from './TOS';

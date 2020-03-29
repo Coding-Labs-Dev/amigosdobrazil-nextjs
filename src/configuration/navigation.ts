@@ -2,31 +2,31 @@ export const MainNavigation = [
   {
     label: 'Home',
     baseURL: '/',
-    path: '/',
+    path: 'home',
   },
-  {
-    label: 'Quem somos',
-    baseURL: '/quemsomos',
-    path: '/quemsomos',
-  },
-  {
-    label: 'Roteiros',
-    baseURL: '/roteiros',
-    path: '/roteiros',
-  },
-  {
-    label: 'Galeria',
-    baseURL: '/galeria',
-    path: '/galeria',
-  },
+  // {
+  //   label: 'Quem somos',
+  //   baseURL: '/quemsomos',
+  //   path: '/quemsomos',
+  // },
+  // {
+  //   label: 'Roteiros',
+  //   baseURL: '/roteiros',
+  //   path: '/roteiros',
+  // },
+  // {
+  //   label: 'Galeria',
+  //   baseURL: '/galeria',
+  //   path: '/galeria',
+  // },
   {
     label: 'Seguro',
-    baseURL: '/seguro',
-    path: '/seguro',
+    baseURL: 'https://www.gtawlabel.com.br/brasiloriente',
+    path: 'https://www.gtawlabel.com.br/brasiloriente',
   },
   {
     label: 'Contato',
-    baseURL: '/contato',
-    path: '/contato',
+    baseURL: '/',
+    path: 'contato',
   },
 ];

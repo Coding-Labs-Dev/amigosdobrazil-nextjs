@@ -10,6 +10,7 @@ export interface Props {
   whyUs: WhyUs[];
   testimonials: Testimonial[];
   settings: Settings;
+  pathname: string;
 }
 
 export interface Settings {

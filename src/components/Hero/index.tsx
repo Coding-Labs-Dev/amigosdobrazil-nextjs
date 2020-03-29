@@ -3,10 +3,11 @@ import { CardTitle, Container, Row, Col, Button } from 'reactstrap';
 
 import { Wrapper, Banner } from './styles';
 import { Props } from './Hero';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const Hero: React.FC<Props> = ({ heroes, forwardRef }) => {
   return (
-    <Wrapper ref={forwardRef}>
+    <Wrapper ref={forwardRef} id="home">
       <Banner
         body
         inverse
@@ -33,9 +34,11 @@ const Hero: React.FC<Props> = ({ heroes, forwardRef }) => {
               </Row>
               <Row className="text-center mt-5">
                 <Col>
-                  <Button color="warning" className="text-uppercase">
-                    Explorar Roteiros
-                  </Button>
+                  <AnchorLink href="#roteiros" offset={100}>
+                    <Button color="warning" className="text-uppercase">
+                      Explorar Roteiros
+                    </Button>
+                  </AnchorLink>
                 </Col>
               </Row>
             </Col>

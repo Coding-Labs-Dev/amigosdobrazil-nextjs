@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import {
   NavbarBrand,
   NavbarToggler,
@@ -22,6 +23,7 @@ const Navigation: React.FC<Props> = ({
   opacity = 1,
   position = 'sticky',
   slug,
+  pathname,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(p => !p);
@@ -46,13 +48,25 @@ const Navigation: React.FC<Props> = ({
         </NavbarToggler>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="w-100 justify-content-end flex-column flex-lg-row text-center">
-            {MainNavigation.map(item => (
-              <NavItem key={item.path}>
-                <NavLink href={item.path} active={item.path === '/'}>
-                  {item.label}
-                </NavLink>
-              </NavItem>
-            ))}
+            {MainNavigation.map(item => {
+              return (
+                <NavItem key={item.path}>
+                  {item.baseURL === pathname ? (
+                    <AnchorLink
+                      href={`#${item.path}`}
+                      offset={50}
+                      className="nav-link"
+                    >
+                      {item.label}
+                    </AnchorLink>
+                  ) : (
+                    <NavLink href={`${item.baseURL}#${item.path}`}>
+                      {item.label}
+                    </NavLink>
+                  )}
+                </NavItem>
+              );
+            })}
             {slug ? (
               <Link
                 href="/roteiros/[slug]/reservar"
@@ -63,7 +77,7 @@ const Navigation: React.FC<Props> = ({
                 </Button>
               </Link>
             ) : (
-              <Link href="/reservar">
+              <Link href="/roteiros">
                 <Button color="warning" className="text-uppercase mx-4">
                   Reservar
                 </Button>

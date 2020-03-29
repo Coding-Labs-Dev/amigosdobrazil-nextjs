@@ -6,7 +6,7 @@ import { Trip, Navigation } from '~/components';
 import { Props } from './[slug]';
 import api from '~/services/api';
 
-const index: NextPage<Props> = ({ trip }) => {
+const index: NextPage<Props> = ({ trip, pathname }) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [opacity, setOpacity] = useState(0);
 
@@ -27,7 +27,12 @@ const index: NextPage<Props> = ({ trip }) => {
 
   return (
     <>
-      <Navigation position="fixed" opacity={opacity} slug={trip.slug} />
+      <Navigation
+        position="fixed"
+        opacity={opacity}
+        slug={trip.slug}
+        pathname={pathname}
+      />
       <Trip
         trip={trip}
         fowardRef={heroRef}
@@ -39,9 +44,9 @@ const index: NextPage<Props> = ({ trip }) => {
   );
 };
 
-index.getInitialProps = async ({ query }) => {
+index.getInitialProps = async ({ query, pathname }) => {
   const { data: trip } = await api.get(`/trips/${query.slug}`);
-  return { trip };
+  return { trip, pathname };
 };
 
 export default index;

@@ -3,4 +3,5 @@ export interface Props {
   departure: Date;
   minSize: number;
   destinations: number;
+  compact?: boolean;
 }

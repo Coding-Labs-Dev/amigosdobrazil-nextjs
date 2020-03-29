@@ -20,6 +20,7 @@ const index: NextPage<Props> = ({
   whyUs,
   testimonials,
   settings,
+  pathname,
 }) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [opacity, setOpacity] = useState(0);
@@ -41,7 +42,7 @@ const index: NextPage<Props> = ({
 
   return (
     <>
-      <Navigation position="fixed" opacity={opacity} />
+      <Navigation position="fixed" opacity={opacity} pathname={pathname} />
       <Hero heroes={heroes} forwardRef={heroRef} />
       {!!nextTrips.length && <NextTrips nextTrips={nextTrips} />}
       {!!whyUs.length && <WhyUs whyUs={whyUs} />}
@@ -53,13 +54,13 @@ const index: NextPage<Props> = ({
   );
 };
 
-index.getInitialProps = async () => {
+index.getInitialProps = async ({ pathname }) => {
   const { data: heroes } = await api.get('/heroes');
   const { data: nextTrips } = await api.get('/nexttrips');
   const { data: whyUs } = await api.get('/whyus');
   const { data: testimonials } = await api.get('/testimonials');
   const { data: settings } = await api.get('/settings');
-  return { heroes, nextTrips, whyUs, testimonials, settings };
+  return { heroes, nextTrips, whyUs, testimonials, settings, pathname };
 };
 
 export default index;

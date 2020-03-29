@@ -17,58 +17,70 @@ const TripInfoCard: React.FC<Props> = ({
   departure,
   minSize,
   destinations,
+  compact,
 }) => (
   <Wrapper className="py-3 px-0">
     <Container fluid>
-      <Card className="py-3 px-1 border-0 shadow">
+      <Card className={`py-3 px-1 border-0 ${!compact && 'shadow'}`}>
         <Row className="text-info">
-          <Col className="d-flex flex-column align-items-center justify-content-top">
-            <FaCalendarAlt size={32} />
-            <label style={{ lineHeight: '1.25rem' }} className="my-0 pt-2">
+          <Col className="d-flex flex-column align-items-center justify-content-between">
+            <FaCalendarAlt size={compact ? 22 : 32} />
+            <label style={{ lineHeight: '1.25rem' }} className={`my-0 pt-2 `}>
               {days}
             </label>
-            <label
-              style={{ lineHeight: '1.25rem' }}
-              className="my-0 small font-weight-bold"
-            >
-              Dias
-            </label>
+
+            {!compact && (
+              <label
+                style={{ lineHeight: '1.25rem' }}
+                className="my-0 small font-weight-bold"
+              >
+                Dias
+              </label>
+            )}
           </Col>
-          <Col className="d-flex flex-column align-items-center justify-content-top">
+          <Col className="d-flex flex-column align-items-center justify-content-between">
             <FaPlaneDeparture size={32} />
-            <label style={{ lineHeight: '1.25rem' }} className="my-0 pt-2">
+            <label style={{ lineHeight: '1.25rem' }} className={`my-0 pt-2 `}>
               {moment(departure).format('DD/MM/YYYY')}
             </label>
-            <label
-              style={{ lineHeight: '1.25rem' }}
-              className="my-0 small font-weight-bold"
-            >
-              Saída
-            </label>
+
+            {!compact && (
+              <label
+                style={{ lineHeight: '1.25rem' }}
+                className="my-0 small font-weight-bold"
+              >
+                Saída
+              </label>
+            )}
           </Col>
-          <Col className="d-flex flex-column align-items-center justify-content-top">
-            <FaUserFriends size={32} />
-            <label style={{ lineHeight: '1.25rem' }} className="my-0 pt-2">
-              {minSize}
-            </label>
-            <label
-              style={{ lineHeight: '1.25rem' }}
-              className="my-0 small font-weight-bold"
-            >
-              Mínimo
-            </label>
-          </Col>
-          <Col className="d-flex flex-column align-items-center justify-content-top">
+          {!compact && (
+            <Col className="d-flex flex-column align-items-center justify-content-between">
+              <FaUserFriends size={32} />
+              <label style={{ lineHeight: '1.25rem' }} className={`my-0 pt-2 `}>
+                {minSize}
+              </label>
+              <label
+                style={{ lineHeight: '1.25rem' }}
+                className="my-0 small font-weight-bold"
+              >
+                Mínimo
+              </label>
+            </Col>
+          )}
+          <Col className="d-flex flex-column align-items-center justify-content-between">
             <FaMapMarkedAlt size={32} />
-            <label style={{ lineHeight: '1.25rem' }} className="my-0 pt-2">
+            <label style={{ lineHeight: '1.25rem' }} className={`my-0 pt-2 `}>
               {destinations}
             </label>
-            <label
-              style={{ lineHeight: '1.25rem' }}
-              className="my-0 small font-weight-bold"
-            >
-              Destinos
-            </label>
+
+            {!compact && (
+              <label
+                style={{ lineHeight: '1.25rem' }}
+                className="my-0 small font-weight-bold"
+              >
+                Destinos
+              </label>
+            )}
           </Col>
         </Row>
       </Card>

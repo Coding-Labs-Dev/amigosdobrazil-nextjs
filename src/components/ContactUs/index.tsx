@@ -62,7 +62,7 @@ const ContactUs: React.FC<Props> = ({ settings }) => {
     }
   });
   return (
-    <Wrapper fluid className="py-5">
+    <Wrapper fluid className="py-5" id="contato">
       <Container>
         <Row>
           <Col xs={12} lg={5} className="px-0 py-2">

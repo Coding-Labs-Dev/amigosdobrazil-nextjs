@@ -46,7 +46,7 @@ const dot = new Dot('_');
 
 const Reservar: NextPage<Props> = ({ tos, trip }) => {
   const dataMethods = useForm({
-    // validationSchema: formSchema,
+    validationSchema: formSchema,
   });
 
   const creditCardMethods = useForm();
