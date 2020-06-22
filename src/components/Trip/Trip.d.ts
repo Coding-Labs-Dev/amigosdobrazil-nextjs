@@ -22,6 +22,9 @@ export interface Trip {
   minSize: number;
   destinationsQty: number;
   departure: Date;
+  bookStart: Date;
+  bookEnd: Date;
+  bookFee: number;
   description: {
     title: string;
     description: string;

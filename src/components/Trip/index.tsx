@@ -9,6 +9,7 @@ import {
   Button,
   CardTitle,
 } from 'reactstrap';
+import moment from 'moment';
 
 import { Props } from './Trip';
 
@@ -43,6 +44,8 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
     refs[key] = ref;
   };
 
+  const canBook = moment().isBetween(moment(trip.bookStart), moment(trip.bookEnd));
+
   return (
     <Wrapper>
       <TripBanner
@@ -74,7 +77,7 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
                 itinerary={trip.itinerary}
                 slug={trip.slug}
               />
-              {!!trip.paymentPlans.length && (
+              {canBook && !!trip.paymentPlans.length && (
                 <PaymentPlans
                   paymentPlans={trip.paymentPlans}
                   slug={trip.slug}
@@ -93,7 +96,7 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
                 documents={documents}
                 itinerary={trip.itinerary}
               />
-              {!!trip.paymentPlans.length && (
+              {canBook && !!trip.paymentPlans.length && (
                 <PaymentPlans
                   paymentPlans={trip.paymentPlans}
                   slug={trip.slug}
