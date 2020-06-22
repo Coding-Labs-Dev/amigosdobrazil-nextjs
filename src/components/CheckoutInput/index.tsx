@@ -24,7 +24,7 @@ const Input: React.FC<Props> = ({
   disabled,
 }) => {
   const inputRef: Array<
-    ((HTMLInputElement | null) | (HTMLTextAreaElement | null)) | null
+  ((HTMLInputElement | null) | (HTMLTextAreaElement | null)) | null
   > = [];
 
   const { register, setValue, errors } = useFormContext();
@@ -38,7 +38,7 @@ const Input: React.FC<Props> = ({
 
     React.useEffect(() => {
       setValue(name, value);
-    }, [value])
+    }, [value]);
 
     return null;
   }
@@ -68,8 +68,10 @@ const Input: React.FC<Props> = ({
               name={name}
               placeholder={placeholder}
               ref={ref => {
-                register(ref);
-                inputRef.push(ref);
+                if(ref) {
+                  register(ref);
+                  inputRef.push(ref);
+                }
               }}
               onFocus={onFocus}
               maxLength={maxLength}

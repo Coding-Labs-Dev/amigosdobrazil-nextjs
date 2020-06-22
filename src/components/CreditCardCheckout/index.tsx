@@ -2,11 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Cards, { CallbackArgument } from 'react-credit-cards';
 import { useFormContext } from 'react-hook-form';
 
+import { Row, Col } from 'reactstrap';
 import { Props as InputProps } from '~/components/CheckoutInput/CheckoutInput';
 import { Props } from './CreditCardCheckout';
 import CheckoutInput from '~/components/CheckoutInput';
 import { Wrapper } from './styles';
-import { Row, Col } from 'reactstrap';
 
 import { Installment } from '~/services/PagSeguroClient';
 
@@ -65,7 +65,7 @@ const CreditCardCheckout: React.FC<Props> = ({
   const { watch, setError, clearError } = useFormContext();
   const watchFields = watch();
   const [focused, setFocused] = useState<
-    'name' | 'expiry' | 'number' | 'cvc' | undefined
+  'name' | 'expiry' | 'number' | 'cvc' | undefined
   >(undefined);
 
   const [maxLength, setMaxLength] = useState<number | undefined>(undefined);
@@ -74,8 +74,8 @@ const CreditCardCheckout: React.FC<Props> = ({
   const [options, setOptions] = useState<any>([]);
 
   const groupOptions = useCallback(
-    (options: Installment[]) => {
-      const noInterest = options
+    (opts: Installment[]) => {
+      const noInterest = opts
         .filter(({ interestFree }) => interestFree)
         .map(({ quantity, installmentAmount, totalAmount }) => ({
           installment: {
@@ -96,7 +96,7 @@ const CreditCardCheckout: React.FC<Props> = ({
             currency: 'BRL',
           })})`,
         }));
-      const withInterest = options
+      const withInterest = opts
         .filter(({ interestFree }) => !interestFree)
         .map(({ quantity, installmentAmount, totalAmount }) => ({
           installment: {
@@ -150,18 +150,16 @@ const CreditCardCheckout: React.FC<Props> = ({
   useEffect(() => {
     if (brand === 'unknown') {
       setError('creditCardNumber', 'invalid', 'Cartão inválido');
-    } else {
-      if (brand) {
-        const getCardInstallments = async (issuer: string) => {
-          const data = await pagSeguroClient.getInstallments(
-            amount,
-            maxNoInterestInstallments
-          );
-          setInstallments(data.installments[issuer]);
-        };
-        getCardInstallments(brand);
-        clearError('creditCardNumber');
-      }
+    } else if (brand) {
+      const getCardInstallments = async (issuer: string) => {
+        const data = await pagSeguroClient.getInstallments(
+          amount,
+          maxNoInterestInstallments
+        );
+        setInstallments(data.installments[issuer]);
+      };
+      getCardInstallments(brand);
+      clearError('creditCardNumber');
     }
   }, [brand]);
 

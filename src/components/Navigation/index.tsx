@@ -12,12 +12,12 @@ import {
   Button,
 } from 'reactstrap';
 
+import { FaBars } from 'react-icons/fa';
 import { MainNavigation } from '~/configuration/navigation';
 
 import { Props } from './Navigation';
 
 import { Navbar } from './styles';
-import { FaBars } from 'react-icons/fa';
 
 const Navigation: React.FC<Props> = ({
   opacity = 1,
@@ -62,7 +62,7 @@ const Navigation: React.FC<Props> = ({
                   ) : (
                     <NavLink
                       href={`${item.baseURL}${
-                        !!item.path ? `#${item.path}` : ''
+                        item.path ? `#${item.path}` : ''
                       }`}
                     >
                       {item.label}

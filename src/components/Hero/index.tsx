@@ -1,9 +1,9 @@
 import React from 'react';
 import { CardTitle, Container, Row, Col, Button } from 'reactstrap';
 
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { Wrapper, Banner } from './styles';
 import { Props } from './Hero';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const Hero: React.FC<Props> = ({ heroes, forwardRef }) => {
   return (

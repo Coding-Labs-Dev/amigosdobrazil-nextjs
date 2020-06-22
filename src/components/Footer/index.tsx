@@ -2,9 +2,9 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { useTheme } from 'styled-components';
 
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import { Wrapper } from './styles';
 
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   const theme = useTheme();

@@ -6,14 +6,10 @@ import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { Wrapper } from './styles';
 import { Props } from './DayInfo';
 
-const getClassName = (
-  event: 'opening' | 'open' | 'closing' | 'closed'
-): string => `${event} text-dark`;
-
-import { DayContext } from '../Trip';
+import { DayContext } from '~/components/Trip';
 
 const DayInfo: React.FC<Props> = ({ title, description, order }) => {
-  let { value, setValue, setRefs, refs } = useContext(DayContext);
+  const { value, setValue, setRefs, refs } = useContext(DayContext);
 
   return (
     <Wrapper

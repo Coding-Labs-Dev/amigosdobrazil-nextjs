@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Props } from './Timeline';
 
 import { Wrapper } from './styles';
-import { DayContext } from '../Trip';
+import { DayContext } from '~/components/Trip';
 
 const scroll = (
   refs: {

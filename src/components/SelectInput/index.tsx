@@ -14,7 +14,7 @@ const SelectInput: React.FC<Props> = ({
   useEffect(() => {
     register({ name });
     setValue(name, defaultValue);
-  }, [])
+  }, []);
 
   const handleChange = (newValue: any) => {
     setValue(name, newValue);

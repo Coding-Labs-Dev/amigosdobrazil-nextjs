@@ -2,10 +2,10 @@ import React from 'react';
 
 import { FaRegCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 
+import { useTheme } from 'styled-components';
 import { Props } from './TripList';
 
 import { Wrapper } from './styles';
-import { useTheme } from 'styled-components';
 
 const TripList: React.FC<Props> = ({ type, items }) => {
   const Icon = type === 'success' ? FaRegCheckCircle : FaExclamationCircle;

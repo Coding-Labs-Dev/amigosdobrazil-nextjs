@@ -1,4 +1,4 @@
-//@ts-nocheck
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -18,6 +18,11 @@ import {
 import moment from 'moment';
 import Dot from 'dot-object';
 
+import {
+  FaChevronDown,
+  FaChevronUp,
+  FaExclamationTriangle,
+} from 'react-icons/fa';
 import api from '~/services/api';
 import PagSeguroClient from '~/services/PagSeguroClient';
 import Loader from '~/components/Loader';
@@ -40,12 +45,7 @@ import {
   Success,
   TripBanner,
 } from '~/components';
-import {
-  FaChevronDown,
-  FaChevronUp,
-  FaExclamationTriangle,
-} from 'react-icons/fa';
-import { CheckoutFormData, CreditCardFormData, ParsedCheckoutData } from '~/components/CheckoutInput/CheckoutInput';
+import { CreditCardFormData } from '~/components/CheckoutInput/CheckoutInput';
 
 const dot = new Dot('_');
 
@@ -56,7 +56,7 @@ const getActivePlanIndex = (paymentPlans: PaymentPlan[]) => {
   });
   if (activePlanIndex < 0 || moments[activePlanIndex].isBefore(moment(), 'd')) return -1;
   return activePlanIndex >= 0 ? moments.length - 1 - activePlanIndex : activePlanIndex;
-}
+};
 
 const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
   const router = useRouter();
@@ -64,7 +64,7 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
   const activePlanIndex = getActivePlanIndex(trip.paymentPlans);
 
   if (typeof window !== 'undefined' && activePlanIndex < 0) {
-      return router.push('/roteiros');
+    return router.push('/roteiros');
   }
 
   const dataMethods = useForm({
@@ -107,7 +107,7 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
       };
       getSessionId();
     }
-  }, [pagSeguroClient])
+  }, [pagSeguroClient]);
 
   const closeCreditCardModal = (): void => setcreditCardModal(p => !p);
 
@@ -161,7 +161,7 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
       setTimeout(async () => {
         await api.post(`/book/${trip.slug}`, formData);
         setSuccess(true);
-      },4000)
+      }, 4000);
     } catch (error) {
       setSending(false);
       setPayError(error.message);
@@ -367,7 +367,7 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
         </Modal>
 
         <Modal
-          isOpen={true}
+          isOpen
           toggle={closeCreditCardModal}
           centered
           backdrop="static"
@@ -428,7 +428,7 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
 Reservar.getInitialProps = async ({ query }) => {
   const { data: tos } = await api.get('/tos');
   const { data: trip } = await api.get(`/trips/${query.slug}`);
-  const { data: settings } = await api.get(`/settings`);
+  const { data: settings } = await api.get('/settings');
   return { tos, trip, settings };
 };
 

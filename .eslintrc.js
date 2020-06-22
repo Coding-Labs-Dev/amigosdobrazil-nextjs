@@ -32,6 +32,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/jsx-props-no-spreading': 0,
     "import/no-extraneous-dependencies": 0,
+    'jsx-a11/click-events-have-key-events': 'off',
   },
   settings: {
     'import/parsers': {

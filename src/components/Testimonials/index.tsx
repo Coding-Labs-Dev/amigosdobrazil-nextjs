@@ -2,8 +2,8 @@ import React from 'react';
 // import VideoPlayer from 'react-simple-video-player';
 import ReactPlayer from 'react-player';
 
-import { Props } from './Testimonials';
 import { Container, Row, Col } from 'reactstrap';
+import { Props } from './Testimonials';
 import { Video } from './styles';
 
 // import { Container } from './styles';

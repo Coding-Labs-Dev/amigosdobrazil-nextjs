@@ -6,11 +6,7 @@ import {
   CardTitle,
   CardText,
   Col,
-  CardImgOverlay,
-  CardImg,
 } from 'reactstrap';
-
-import Link from 'next/link';
 
 import { Wrapper, Banner } from './styles';
 import { Props } from './WhyUs';

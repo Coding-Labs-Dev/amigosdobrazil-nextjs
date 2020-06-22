@@ -1,8 +1,8 @@
 import React from 'react';
 
+import mustache from 'mustache';
 import { Props } from './TOS';
 import { Wrapper } from './styles';
-import mustache from 'mustache';
 
 const TOS: React.FC<Props> = ({ template, data }) => (
   <Wrapper className="p-4">

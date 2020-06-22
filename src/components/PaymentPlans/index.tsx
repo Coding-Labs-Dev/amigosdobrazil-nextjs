@@ -23,7 +23,7 @@ const getActivePlanIndex = (paymentPlans: PaymentPlan[]) => {
   });
   if (activePlanIndex < 0 || moments[activePlanIndex].isBefore(moment(), 'd')) return -1;
   return activePlanIndex >= 0 ? moments.length - 1 - activePlanIndex : activePlanIndex;
-}
+};
 
 const PaymentPlans: React.FC<Props> = ({
   slug,

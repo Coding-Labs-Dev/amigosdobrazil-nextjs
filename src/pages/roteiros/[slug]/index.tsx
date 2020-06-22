@@ -20,6 +20,7 @@ const index: NextPage<Props> = ({ trip, pathname }) => {
 
         if (Math.abs(newValue - opacity) >= 0.5) setOpacity(newValue);
       }
+      return undefined;
     },
     [opacity],
     heroRef

@@ -1,24 +1,19 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
 import {
   Container,
   Row,
   Col,
-  Card,
-  CardBody,
-  Button,
-  CardTitle,
 } from 'reactstrap';
 import moment from 'moment';
 
 import { Props } from './Trip';
 
 import { Wrapper } from './styles';
-import TripBanner from '../TripBanner';
-import TripInfoCard from '../TripInfoCard';
-import Itinerary from '../Itinerary';
-import TripSideBar from '../TripSideBar';
-import PaymentPlans from '../PaymentPlans';
+import TripBanner from '~/components/TripBanner';
+import TripInfoCard from '~/components/TripInfoCard';
+import Itinerary from '~/components/Itinerary';
+import TripSideBar from '~/components/TripSideBar';
+import PaymentPlans from '~/components/PaymentPlans';
 
 const ctx: {
   value: number | null;

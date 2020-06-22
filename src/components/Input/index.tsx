@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Props } from './Input';
@@ -11,7 +11,7 @@ const Input: React.FC<Props> = ({
   placeholder,
 }) => {
   const inputRef: Array<
-    ((HTMLInputElement | null) | (HTMLTextAreaElement | null)) | null
+  ((HTMLInputElement | null) | (HTMLTextAreaElement | null)) | null
   > = [];
 
   const { register, errors } = useFormContext();

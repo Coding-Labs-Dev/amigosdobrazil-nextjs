@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardTitle, Container, Row, Col, Button } from 'reactstrap';
+import { CardTitle, Container, Row, Col } from 'reactstrap';
 
 import { Wrapper, Banner } from './styles';
 import { Props } from './Banner';

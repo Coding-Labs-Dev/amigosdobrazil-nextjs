@@ -1,3 +1,4 @@
+import React from 'react';
 import App, { AppContext } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';

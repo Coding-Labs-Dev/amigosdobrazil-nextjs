@@ -14,14 +14,12 @@ import {
   FaRegEnvelope,
 } from 'react-icons/fa';
 
-import { Props } from './ContactUs';
-
 import Input from '../Input';
 import Loader from '../Loader';
 
 import { Wrapper, Info } from './styles';
 
-import { FormSchema } from './ContactUs';
+import { Props, FormSchema } from './ContactUs';
 import api from '~/services/api';
 
 const formSchema = yup.object().shape({
@@ -53,11 +51,10 @@ const ContactUs: React.FC<Props> = ({ settings }) => {
   const onSubmit = methods.handleSubmit(async data => {
     setIsSending(true);
     try {
-      const result = await api.post('/formcontacts', data);
+      await api.post('/formcontacts', data);
       setIsSubmitted(true);
       setIsSending(false);
     } catch (err) {
-      console.error(err);
       setIsSending(false);
     }
   });

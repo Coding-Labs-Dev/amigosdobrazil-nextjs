@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Wrapper } from './styles';
 import { FaCheckCircle } from 'react-icons/fa';
 import { Button } from 'reactstrap';
+import { Wrapper } from './styles';
 
 const Success = () => {
   const [show, setShow] = useState(false);

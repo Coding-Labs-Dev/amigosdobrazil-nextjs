@@ -1,13 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
-import { Container, Card, CardTitle, Button, CardBody, Row } from 'reactstrap';
+import { Container, Card, CardTitle, CardBody } from 'reactstrap';
 
 import { Props } from './Itinerary';
 
 import { Wrapper } from './styles';
-import DayInfo from '../DayInfo';
+import DayInfo from '~/components/DayInfo';
 
-const Itinerary: React.FC<Props> = ({ description, itinerary, slug }) => (
+const Itinerary: React.FC<Props> = ({ description, itinerary }) => (
   <Wrapper>
     <Container>
       <Card className="pt-5 pb-3 px-4 px-md-5 shadow border-0">
