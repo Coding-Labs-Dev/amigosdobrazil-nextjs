@@ -18,6 +18,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
+    project: './tsconfig.json',
     ecmaVersion: 2018,
     sourceType: 'module',
   },
@@ -27,6 +28,10 @@ module.exports = {
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx', '.ts'] }],
     'import/prefer-default-export': 'off',
     'no-console': ['error', { allow: ['tron'] }],
+    '@typescript-eslint/camelcase': 'off',
+    'react/prop-types': 0,
+    'react/jsx-props-no-spreading': 0,
+    "import/no-extraneous-dependencies": 0,
   },
   settings: {
     'import/parsers': {
