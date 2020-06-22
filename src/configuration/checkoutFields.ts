@@ -1,6 +1,10 @@
 import * as yup from 'yup';
 
-import { Props } from '~/components/CheckoutInput/CheckoutInput';
+import {
+  Props,
+  CheckoutData,
+  ParsedCheckoutData,
+} from '~/components/CheckoutInput/CheckoutInput';
 
 export const formSchema = yup.object().shape({
   name: yup
@@ -64,6 +68,23 @@ export const formSchema = yup.object().shape({
   address_commercial_city: yup.string(),
   address_commercial_district: yup.string(),
   address_commercial_zip: yup.string(),
+});
+
+export const creditCardSchema = yup.object().shape({
+  cardHolder: yup
+    .string()
+    .min(6, 'Digite o nome como no cartão')
+    .required('Este campo é obrigtório'),
+  expDate: yup
+    .string()
+    .length(5, 'Data inválida')
+    .required('Este campo é obrigtório'),
+  creditCardNumber: yup
+    .string()
+    .required('Este campo é obrigtório'),
+  cvv: yup
+    .string()
+    .required('Este campo é obrigtório'),
 });
 
 export const personalData: Props[] = [
@@ -307,3 +328,39 @@ export const commercialAddress: Props[] = [
     },
   },
 ];
+
+// export const ParseCheckoutFields = async (
+//   checkoutData: CheckoutData
+// ): ParsedCheckoutData => {
+//   const creditCardToken = '';
+//   const creditCard = {
+//     token: creditCardToken,
+//     installment: {
+//       quantity:
+//     }
+//   };
+//   const sender = {
+//     hash: '',
+//     name: checkoutData.name,
+//     email: checkoutData.email,
+//     phone: {
+//       areaCode: checkoutData.mobile.substr(0, 2),
+//       phone: checkoutData.mobile.substr(2),
+//     },
+//     documents: {
+//       document: {
+//         type: 'CPF',
+//         value: checkoutData.cpf,
+//       },
+//     },
+//   };
+
+//   return {
+//     reference: 'AMIGOS-DO-BRAZIL',
+
+//     sender,
+//     shipping: {
+//       addressRequired: false,
+//     }
+//   }
+// };

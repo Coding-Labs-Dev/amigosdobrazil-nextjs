@@ -43,8 +43,13 @@ export const Wrapper = styled(Col)`
 
 export const Container = styled.div<ContainerProps>`
   cursor: text;
-  div {
+  div.content {
     display: flex;
+  }
+
+  div.select-container {
+    width: 100%;
+    display: block;
   }
 
   ${props =>

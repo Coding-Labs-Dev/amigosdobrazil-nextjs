@@ -23,4 +23,6 @@ export interface Settings {
   readonly zip: string;
   readonly mainPhone: string;
   readonly altPhone?: string;
+  readonly maxInstallments: number;
+  readonly maxNoInterestInstallments: number;
 }
