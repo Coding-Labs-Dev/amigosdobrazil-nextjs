@@ -13,29 +13,26 @@ import {
 } from 'reactstrap';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
-import { Props } from './PaymentPlans';
+import { Props, PaymentPlan } from './PaymentPlans';
 import { Wrapper } from './styles';
+
+const getActivePlanIndex = (paymentPlans: PaymentPlan[]) => {
+  const moments = [...paymentPlans.map(({ date }) => moment(date))];
+  const activePlanIndex = moments.reverse().findIndex(date => {
+    return moment().isSameOrBefore(date, 'd');
+  });
+  if (activePlanIndex < 0 || moments[activePlanIndex].isBefore(moment(), 'd')) return -1;
+  return activePlanIndex >= 0 ? moments.length - 1 - activePlanIndex : activePlanIndex;
+}
 
 const PaymentPlans: React.FC<Props> = ({
   slug,
   paymentPlans,
   display = 'xs',
 }) => {
-  const qty = paymentPlans.length - 1;
-  const activePlans = paymentPlans
-    .map((plan, i) =>
-      i < qty
-        ? moment(plan.date).isBetween(
-            moment().subtract(1, 'd'),
-            paymentPlans[i + 1].date,
-            'd'
-          )
-        : moment(plan.date).isSameOrBefore(moment(), 'd')
-    )
-    .map((isActive, i) => (isActive ? paymentPlans[i].id : undefined))
-    .filter(isActive => typeof isActive !== 'undefined');
+  const activePlanIndex = getActivePlanIndex(paymentPlans);
 
-  return !!activePlans.length ? (
+  return (
     <Wrapper className="my-3">
       <Container>
         <Card
@@ -48,7 +45,7 @@ const PaymentPlans: React.FC<Props> = ({
           </CardTitle>
           <CardBody>
             {paymentPlans.map((plan, i) => {
-              const active = activePlans.includes(plan.id);
+              const active = i === activePlanIndex;
               return (
                 <Card
                   className={`p-4 my-3 ${
@@ -77,7 +74,7 @@ const PaymentPlans: React.FC<Props> = ({
                               active ? 'primary' : 'light'
                             } d-block`}
                           >
-                            Inscrição {i < qty ? 'até' : 'após'}{' '}
+                            Inscrição até{' '}
                             {moment(plan.date).format('DD/MM/YYYY')}
                           </span>
                           <span className="font-weight-bold text-light d-block">
@@ -115,7 +112,8 @@ const PaymentPlans: React.FC<Props> = ({
               );
             })}
             <Row className="px-3">
-              <Link
+              {activePlanIndex >= 0 ? (
+                <Link
                 href="/roteiros/[slug]/reservar"
                 as={`/roteiros/${slug}/reservar`}
               >
@@ -123,13 +121,16 @@ const PaymentPlans: React.FC<Props> = ({
                   Reservar
                 </Button>
               </Link>
+              ) : (
+                <Button color="warning" className="ml-auto text-uppercase mt-2" disabled>
+                Reservar
+              </Button>
+              )}
             </Row>
           </CardBody>
         </Card>
       </Container>
     </Wrapper>
-  ) : (
-    <></>
   );
 };
 

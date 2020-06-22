@@ -1,6 +1,7 @@
 //@ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useForm, FormContext } from 'react-hook-form';
 import {
   Container,
@@ -14,13 +15,15 @@ import {
   ModalBody,
   Alert,
 } from 'reactstrap';
-
+import moment from 'moment';
 import Dot from 'dot-object';
 
 import api from '~/services/api';
+import PagSeguroClient from '~/services/PagSeguroClient';
 import Loader from '~/components/Loader';
 import {
   formSchema,
+  creditCardSchema,
   personalData,
   residentialAddress,
   commercialAddress,
@@ -42,15 +45,35 @@ import {
   FaChevronUp,
   FaExclamationTriangle,
 } from 'react-icons/fa';
+import { CheckoutFormData, CreditCardFormData, ParsedCheckoutData } from '~/components/CheckoutInput/CheckoutInput';
 
 const dot = new Dot('_');
 
-const Reservar: NextPage<Props> = ({ tos, trip }) => {
+const getActivePlanIndex = (paymentPlans: PaymentPlan[]) => {
+  const moments = [...paymentPlans.map(({ date }) => moment(date))];
+  const activePlanIndex = moments.reverse().findIndex(date => {
+    return moment().isSameOrBefore(date, 'd');
+  });
+  if (activePlanIndex < 0 || moments[activePlanIndex].isBefore(moment(), 'd')) return -1;
+  return activePlanIndex >= 0 ? moments.length - 1 - activePlanIndex : activePlanIndex;
+}
+
+const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
+  const router = useRouter();
+
+  const activePlanIndex = getActivePlanIndex(trip.paymentPlans);
+
+  if (typeof window !== 'undefined' && activePlanIndex < 0) {
+      return router.push('/roteiros');
+  }
+
   const dataMethods = useForm({
     validationSchema: formSchema,
   });
 
-  const creditCardMethods = useForm();
+  const creditCardMethods = useForm({
+    validationSchema: creditCardSchema,
+  });
 
   const { handleSubmit: personalDataSubmit } = dataMethods;
   const { handleSubmit: creditcardSubmit } = creditCardMethods;
@@ -62,6 +85,29 @@ const Reservar: NextPage<Props> = ({ tos, trip }) => {
   const [sending, setSending] = useState(false);
   const [payError, setPayError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [pagSeguroClient, setPagSeguroClient] = useState(null);
+
+  useEffect(() => {
+    if (window) {
+      setPagSeguroClient(new PagSeguroClient());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window && pagSeguroClient) {
+      const getSessionId = async () => {
+        try {
+          const { data: { token } } = await api.post('/paymentsessions');
+          await pagSeguroClient.createSession(token);
+          const payments = await pagSeguroClient.getPaymentMethods();
+          if (!payments || payments.error || !payments?.paymentMethods.CREDIT_CARD) throw new Error('Error loading available payment methods');
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getSessionId();
+    }
+  }, [pagSeguroClient])
 
   const closeCreditCardModal = (): void => setcreditCardModal(p => !p);
 
@@ -93,16 +139,29 @@ const Reservar: NextPage<Props> = ({ tos, trip }) => {
     setOpenDeclinedTOSModal(true);
   };
 
-  const pay = async (creditCard: any): Promise<void> => {
-    const data = dot.object({
-      ...dataMethods.getValues(),
-      payment: creditCard,
-    });
-    console.log(JSON.stringify(data, null, 2));
+  const pay = async (creditCard: CreditCardFormData): Promise<void> => {
     setSending(true);
+    const creditCardToken = await pagSeguroClient.getCreditCardToken({
+      cardNumber: creditCard.creditCardNumber,
+      brand: creditCard.brand,
+      cvv: creditCard.cvv,
+      expirationMonth: creditCard.expDate.split('/')[0],
+      expirationYear: `20${creditCard.expDate.split('/')[1]}`
+    });
+
+    const senderHash = await pagSeguroClient.getSenderHash();
+
+    const formData = dot.object({
+      ...dataMethods.getValues(),
+      senderHash,
+      creditCardToken,
+    });
+
     try {
-      await api.post(`/book/${trip.slug}`);
-      setSuccess(true);
+      setTimeout(async () => {
+        await api.post(`/book/${trip.slug}`, formData);
+        setSuccess(true);
+      },4000)
     } catch (error) {
       setSending(false);
       setPayError(error.message);
@@ -308,7 +367,7 @@ const Reservar: NextPage<Props> = ({ tos, trip }) => {
         </Modal>
 
         <Modal
-          isOpen={creditCardModal}
+          isOpen={true}
           toggle={closeCreditCardModal}
           centered
           backdrop="static"
@@ -335,7 +394,13 @@ const Reservar: NextPage<Props> = ({ tos, trip }) => {
               <form onSubmit={creditcardSubmit(pay)}>
                 <Col>
                   <Row>
-                    <CreditCardCheckout disabled={sending} />
+                    <CreditCardCheckout
+                      disabled={sending}
+                      amount={trip.bookFee}
+                      maxInstallments={settings.maxInstallments}
+                      maxNoInterestInstallments={settings.maxNoInterestInstallments}
+                      pagSeguroClient={pagSeguroClient}
+                    />
                   </Row>
                   <Row className="py-2 align-items-center justify-content-end">
                     <Button
@@ -363,7 +428,8 @@ const Reservar: NextPage<Props> = ({ tos, trip }) => {
 Reservar.getInitialProps = async ({ query }) => {
   const { data: tos } = await api.get('/tos');
   const { data: trip } = await api.get(`/trips/${query.slug}`);
-  return { tos, trip };
+  const { data: settings } = await api.get(`/settings`);
+  return { tos, trip, settings };
 };
 
 export default Reservar;
