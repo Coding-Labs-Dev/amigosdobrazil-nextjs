@@ -18,11 +18,10 @@ import { Wrapper } from './styles';
 
 const getActivePlanIndex = (paymentPlans: PaymentPlan[]) => {
   const moments = [...paymentPlans.map(({ date }) => moment(date))];
-  const activePlanIndex = moments.reverse().findIndex(date => {
-    return moment().isSameOrBefore(date, 'd');
+  const activePlanIndex = moments.findIndex(date => {
+    return date.isSameOrAfter(moment(), 'd');
   });
-  if (activePlanIndex < 0 || moments[activePlanIndex].isBefore(moment(), 'd')) return -1;
-  return activePlanIndex >= 0 ? moments.length - 1 - activePlanIndex : activePlanIndex;
+  return activePlanIndex < 0 ? moments.length - 1 : activePlanIndex;
 };
 
 const PaymentPlans: React.FC<Props> = ({
@@ -48,8 +47,8 @@ const PaymentPlans: React.FC<Props> = ({
               const active = i === activePlanIndex;
               return (
                 <Card
-                  className={`p-4 my-3 ${
-                    active ? 'border-primary' : 'border-light'
+                  className={`p-4 my-3 b-payment-plan ${
+                    active ? 'border-primary b-payment-plan__active' : 'border-light'
                   }`}
                   key={`${display}_${plan.id}`}
                   style={{ borderWidth: 1, opacity: active ? 1 : 0.6 }}
