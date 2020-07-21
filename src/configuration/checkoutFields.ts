@@ -1,10 +1,6 @@
 import * as yup from 'yup';
 
-import {
-  Props,
-  CheckoutData,
-  ParsedCheckoutData,
-} from '~/components/CheckoutInput/CheckoutInput';
+import { Props } from '~/components/CheckoutInput/CheckoutInput';
 
 export const formSchema = yup.object().shape({
   name: yup
@@ -79,12 +75,8 @@ export const creditCardSchema = yup.object().shape({
     .string()
     .length(5, 'Data inválida')
     .required('Este campo é obrigtório'),
-  creditCardNumber: yup
-    .string()
-    .required('Este campo é obrigtório'),
-  cvv: yup
-    .string()
-    .required('Este campo é obrigtório'),
+  creditCardNumber: yup.string().required('Este campo é obrigtório'),
+  cvv: yup.string().required('Este campo é obrigtório'),
 });
 
 export const personalData: Props[] = [

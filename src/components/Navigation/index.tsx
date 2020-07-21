@@ -24,6 +24,7 @@ const Navigation: React.FC<Props> = ({
   position = 'sticky',
   slug,
   pathname,
+  canBook,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(p => !p);
@@ -71,16 +72,16 @@ const Navigation: React.FC<Props> = ({
                 </NavItem>
               );
             })}
-            {slug ? (
+            {slug && canBook && (
               <Link
-                href="/roteiros/[slug]/reservar"
-                as={`/roteiros/${slug}/reservar`}
+                href={`/roteiros/${slug}/reservar`}
               >
                 <Button color="warning" className="my-auto text-uppercase mt-2">
                   Reservar
                 </Button>
               </Link>
-            ) : (
+            )}
+            {!slug && (
               <Link href="/roteiros">
                 <Button color="warning" className="text-uppercase mx-4">
                   Reservar

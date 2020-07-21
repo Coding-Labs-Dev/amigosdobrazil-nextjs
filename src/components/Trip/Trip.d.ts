@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Trip {
   slug: string;
   featured: boolean;
@@ -7,15 +9,15 @@ export interface Trip {
     url: string;
     opacity: string;
     position:
-      | 'left top'
-      | 'left center'
-      | 'left bottom'
-      | 'right top'
-      | 'right center'
-      | 'right bottom'
-      | 'center top'
-      | 'center center'
-      | 'center bottom';
+    | 'left top'
+    | 'left center'
+    | 'left bottom'
+    | 'right top'
+    | 'right center'
+    | 'right bottom'
+    | 'center top'
+    | 'center center'
+    | 'center bottom';
   };
   titlePosition: 'top' | 'center' | 'bottom';
   days: number;
@@ -47,10 +49,19 @@ export interface Trip {
     installmentsQty: number;
     installmentsValue: string;
   }[];
+  transportPlans: {
+    id: string;
+    usd: string;
+    rate: string;
+    installmentsQty: number;
+  }[];
 }
 
 export interface Props {
-  trip: Trip;
+  trip: Trip & {
+    canBook: boolean;
+    activePlanIndex: number;
+  };
   fowardRef: React.fowardRef;
   documents: { description: string }[];
   includes: { description: string }[];
@@ -61,4 +72,13 @@ export interface Props {
     mainDestination: boolean;
     mainDestinationTitle: string;
   }[];
+}
+
+export interface Context {
+  value: number | null;
+  setValue: Dispatch<SetStateAction<number>> | null;
+  refs: {
+    [key: number]: HTMLDivElement;
+  } | null;
+  setRefs: ((key: number, ref: HTMLDivElement) => void) | null;
 }

@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import { Trip, Navigation } from '~/components';
-import { Props } from '~/types/[slug]';
+import { Props } from '~/types/pages/[slug]';
 import api from '~/services/api';
 
 const index: NextPage<Props> = ({ trip, pathname }) => {
@@ -33,6 +33,7 @@ const index: NextPage<Props> = ({ trip, pathname }) => {
         opacity={opacity}
         slug={trip.slug}
         pathname={pathname}
+        canBook={trip.canBook}
       />
       <Trip
         trip={trip}

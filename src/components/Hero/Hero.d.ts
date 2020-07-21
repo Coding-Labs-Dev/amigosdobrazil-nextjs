@@ -1,10 +1,6 @@
-export type HeroData = {
-  id: string;
-  background: string;
-  position: string;
-  opacity: number;
-};
+import { Hero } from '~/types/models';
+
 export interface Props {
-  heroes: HeroData[];
+  heroes: Hero[];
   forwardRef: React.fowardRef;
 }

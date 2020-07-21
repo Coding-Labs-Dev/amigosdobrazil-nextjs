@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 declare module 'react-anchor-link-smooth-scroll' {
   interface Props {
     href: string;

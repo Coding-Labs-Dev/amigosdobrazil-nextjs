@@ -1,8 +1,4 @@
-export interface Testimonial {
-  id: number;
-  url: string;
-  poster: string;
-}
+import { Testimonial } from '~/types/models';
 
 export interface Props {
   testimonials: Testimonial[];

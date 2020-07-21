@@ -13,4 +13,38 @@ export const Wrapper = styled.div`
     font-weight: 700 !important;
     font-size: 1.5rem !important;
   }
+
+  .tos-data {
+    ul.clausules {
+      margin: 10px 0;
+
+      li {
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+        padding: 5px 0;
+        text-indent: -30px;
+        margin-left: 30px;
+      }
+    }
+
+    .date {
+      padding: 20px 0;
+      text-align: right;
+    }
+
+    .signature {
+      display: flex;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 50px;
+
+      & > div {
+        border-top: 1px solid #000000;
+        padding-top: 10px;
+        text-align: center
+      }
+    }
+  }
+
 `;

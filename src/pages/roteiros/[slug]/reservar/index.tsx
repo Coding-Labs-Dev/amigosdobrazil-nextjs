@@ -1,7 +1,8 @@
-// @ts-nocheck
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { useForm, FormContext } from 'react-hook-form';
 import {
   Container,
@@ -15,7 +16,6 @@ import {
   ModalBody,
   Alert,
 } from 'reactstrap';
-import moment from 'moment';
 import Dot from 'dot-object';
 
 import {
@@ -34,7 +34,7 @@ import {
   commercialAddress,
 } from '~/configuration/checkoutFields';
 
-import { Props } from '~/types/Reservar';
+import { Props } from '~/types/pages/Reservar';
 import { Wrapper } from '~/styles/styled/reservar_styles';
 
 import {
@@ -45,33 +45,19 @@ import {
   Success,
   TripBanner,
 } from '~/components';
-import { CreditCardFormData } from '~/components/CheckoutInput/CheckoutInput';
+import {
+  CreditCardFormData,
+  CheckoutFormData,
+} from '~/components/CheckoutInput/CheckoutInput';
 
 const dot = new Dot('_');
 
-const getActivePlanIndex = (paymentPlans: PaymentPlan[]) => {
-  const moments = [...paymentPlans.map(({ date }) => moment(date))];
-  const activePlanIndex = moments.reverse().findIndex(date => {
-    return moment().isSameOrBefore(date, 'd');
-  });
-  if (activePlanIndex < 0 || moments[activePlanIndex].isBefore(moment(), 'd')) return -1;
-  return activePlanIndex >= 0 ? moments.length - 1 - activePlanIndex : activePlanIndex;
-};
-
-const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
-  const router = useRouter();
-
-  const activePlanIndex = getActivePlanIndex(trip.paymentPlans);
-
-  if (typeof window !== 'undefined' && activePlanIndex < 0) {
-    return router.push('/roteiros');
-  }
-
-  const dataMethods = useForm({
+const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
+  const dataMethods = useForm<CheckoutFormData>({
     validationSchema: formSchema,
   });
 
-  const creditCardMethods = useForm({
+  const creditCardMethods = useForm<CreditCardFormData>({
     validationSchema: creditCardSchema,
   });
 
@@ -85,7 +71,9 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
   const [sending, setSending] = useState(false);
   const [payError, setPayError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [pagSeguroClient, setPagSeguroClient] = useState(null);
+  const [pagSeguroClient, setPagSeguroClient] = useState<
+    PagSeguroClient | undefined
+  >();
 
   useEffect(() => {
     if (window) {
@@ -97,12 +85,19 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
     if (window && pagSeguroClient) {
       const getSessionId = async () => {
         try {
-          const { data: { token } } = await api.post('/paymentsessions');
+          const {
+            data: { token },
+          } = await api.post('/paymentsessions');
           await pagSeguroClient.createSession(token);
           const payments = await pagSeguroClient.getPaymentMethods();
-          if (!payments || payments.error || !payments?.paymentMethods.CREDIT_CARD) throw new Error('Error loading available payment methods');
+          if (
+            !payments ||
+            payments.error ||
+            !payments?.paymentMethods.CREDIT_CARD
+          )
+            throw new Error('Error loading available payment methods');
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       };
       getSessionId();
@@ -123,14 +118,8 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
   const acceptTOS = (): void => {
     setOpenTOSSModal(false);
     setOpenDeclinedTOSModal(false);
-    const isValid = formSchema.isValidSync(dataMethods.getValues());
-    if (
-      dataMethods.formState.dirty &&
-      !Object.entries(dataMethods.errors).length &&
-      isValid
-    )
-      setcreditCardModal(true);
     dataMethods.setValue('tos', true);
+    setcreditCardModal(true);
   };
 
   const declineTOS = (): void => {
@@ -141,12 +130,14 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
 
   const pay = async (creditCard: CreditCardFormData): Promise<void> => {
     setSending(true);
+    if (!pagSeguroClient) return;
+
     const creditCardToken = await pagSeguroClient.getCreditCardToken({
       cardNumber: creditCard.creditCardNumber,
       brand: creditCard.brand,
       cvv: creditCard.cvv,
       expirationMonth: creditCard.expDate.split('/')[0],
-      expirationYear: `20${creditCard.expDate.split('/')[1]}`
+      expirationYear: `20${creditCard.expDate.split('/')[1]}`,
     });
 
     const senderHash = await pagSeguroClient.getSenderHash();
@@ -266,31 +257,14 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
                           </Collapse>
                         </Col>
                       </Row>
-                      <Row className="py-md-4 py-3 w-100">
-                        <Col>
-                          <Row className="px-2">
-                            <label
-                              className="d-flex align-items-center"
-                              htmlFor="tos"
-                              onClick={e => {
-                                e.preventDefault();
-                                setOpenTOSSModal(p => !p);
-                              }}
-                            >
-                              Declaro ter lido e estar de acordo com o Contrato
-                              de Prestação de Serviços de Agenciamento de Viagem
-                              <input
-                                type="checkbox"
-                                name="tos"
-                                id="tos"
-                                ref={dataMethods.register}
-                              />
-                              <span className="checkmark" />
-                            </label>
-                          </Row>
-                        </Col>
-                      </Row>
                       <Row className="py-md-4 py-3 w-100 justify-content-end">
+                        <input
+                          className="d-none"
+                          type="checkbox"
+                          name="tos"
+                          id="tos"
+                          ref={dataMethods.register}
+                        />
                         <Button color="warning" type="submit">
                           Continuar
                         </Button>
@@ -301,37 +275,37 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
               </Card>
             </Container>
           </form>
+
+          <Modal
+            isOpen={openTOSModal}
+            toggle={() => setOpenTOSSModal(p => !p)}
+            centered
+            size="lg"
+          >
+            <ModalBody>
+              <TOS template={tos} trip={trip} />
+              <Row className="py-2 px-4 align-items-center justify-content-end">
+                <Button
+                  color="link"
+                  className="text-light"
+                  onClick={() => setOpenTOSSModal(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  color="link"
+                  className="text-light"
+                  onClick={declineTOS}
+                >
+                  Não Concordo
+                </Button>
+                <Button color="warning" onClick={acceptTOS}>
+                  Concordo
+                </Button>
+              </Row>
+            </ModalBody>
+          </Modal>
         </FormContext>
-
-        <Modal
-          isOpen={openTOSModal}
-          toggle={() => setOpenTOSSModal(p => !p)}
-          centered
-          size="lg"
-        >
-          <ModalBody>
-            <TOS
-              template={tos}
-              data={{ ...dataMethods.getValues(), title: 'Viagem' }}
-            />
-            <Row className="py-2 px-4 align-items-center justify-content-end">
-              <Button
-                color="link"
-                className="text-light"
-                onClick={() => setOpenTOSSModal(false)}
-              >
-                Cancelar
-              </Button>
-              <Button color="link" className="text-light" onClick={declineTOS}>
-                Não Concordo
-              </Button>
-              <Button color="warning" onClick={acceptTOS}>
-                Concordo
-              </Button>
-            </Row>
-          </ModalBody>
-        </Modal>
-
         <Modal
           isOpen={openDeclinedTOSModal}
           toggle={() => setOpenDeclinedTOSModal(p => !p)}
@@ -367,7 +341,7 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
         </Modal>
 
         <Modal
-          isOpen
+          isOpen={creditCardModal}
           toggle={closeCreditCardModal}
           centered
           backdrop="static"
@@ -398,7 +372,9 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
                       disabled={sending}
                       amount={trip.bookFee}
                       maxInstallments={settings.maxInstallments}
-                      maxNoInterestInstallments={settings.maxNoInterestInstallments}
+                      maxNoInterestInstallments={
+                        settings.maxNoInterestInstallments
+                      }
                       pagSeguroClient={pagSeguroClient}
                     />
                   </Row>
@@ -425,11 +401,27 @@ const Reservar: NextPage<Props> = ({ tos, trip, settings }) => {
   );
 };
 
-Reservar.getInitialProps = async ({ query }) => {
-  const { data: tos } = await api.get('/tos');
-  const { data: trip } = await api.get(`/trips/${query.slug}`);
-  const { data: settings } = await api.get('/settings');
-  return { tos, trip, settings };
+Reservar.getInitialProps = async ({
+  res,
+  query,
+}): Promise<Props | undefined> => {
+  try {
+    const { data: tos } = await api.get('/tos');
+    const { data: trip } = await api.get(`/trips/${query.slug}`);
+    const { data: settings } = await api.get('/settings');
+
+    if (!trip.canBook) throw Error('This trip is not open for booking');
+
+    return { tos, trip, settings };
+  } catch (e) {
+    if (res) {
+      res.statusCode = 303;
+      res.setHeader('Location', '/roteiros');
+      res.end();
+      return undefined;
+    }
+    return undefined;
+  }
 };
 
 export default Reservar;

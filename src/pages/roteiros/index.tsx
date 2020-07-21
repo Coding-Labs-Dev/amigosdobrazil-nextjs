@@ -13,7 +13,7 @@ import {
 
 import api from '~/services/api';
 
-import { Props } from '~/types/roteiros';
+import { Props } from '~/types/pages/roteiros';
 import { Wrapper, Banner } from '~/styles/styled/roteiros_styles';
 import { Gradient, TripInfoCard, Navigation } from '~/components';
 

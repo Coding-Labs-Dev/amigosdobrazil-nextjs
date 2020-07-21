@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useContext } from 'react';
 
 import { Collapse, CardBody, Card, Container, Row, Col } from 'reactstrap';
@@ -6,7 +7,7 @@ import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { Wrapper } from './styles';
 import { Props } from './DayInfo';
 
-import { DayContext } from '~/components/Trip';
+import { DayContext } from '../Trip';
 
 const DayInfo: React.FC<Props> = ({ title, description, order }) => {
   const { value, setValue, setRefs, refs } = useContext(DayContext);

@@ -15,6 +15,6 @@ export const Navbar = styled(NavigationBar)<Props>`
   @media screen and (min-width: 576px) {
     opacity: ${props => props.opacity};
     background: ${props =>
-      `rgba(255,255,255,${backgroundOpacity(props.opacity || 1)})`};
+    `rgba(255,255,255,${backgroundOpacity(props.opacity || 1)})`};
   }
 `;

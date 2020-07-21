@@ -16,7 +16,7 @@ declare module 'react-simple-video-player' {
   }
 
   export default class VideoPlayer extends React.PureComponent<
-    VideoPlayerProps,
-    VideoPlayerState
+  VideoPlayerProps,
+  VideoPlayerState
   > {}
 }

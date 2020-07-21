@@ -1,5 +1,3 @@
-import { IconType } from 'react-icons';
-
 export interface Props {
   name: string;
   type?: 'text' | 'number' | 'select' | 'hidden';

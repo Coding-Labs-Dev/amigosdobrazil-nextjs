@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BannerProps } from '~/types/roteiros';
+import { BannerProps } from '~/types/pages/roteiros';
 
 export const Wrapper = styled.div`
   .shadow-md {

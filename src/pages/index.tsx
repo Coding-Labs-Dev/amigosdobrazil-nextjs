@@ -11,7 +11,7 @@ import {
   ContactUs,
   Navigation,
 } from '~/components';
-import { Props } from '~/types';
+import { Props } from '~/types/pages';
 import api from '~/services/api';
 
 const index: NextPage<Props> = ({

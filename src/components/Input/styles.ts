@@ -56,7 +56,7 @@ export const Container = styled.div<ContainerProps>`
     css`
       animation: ${shake} 0.4s linear;
       border: 1px solid;
-      border-color: ${props => props.theme.colors.danger};
+      border-color: ${props.theme.colors.danger};
     `}
 
   input,

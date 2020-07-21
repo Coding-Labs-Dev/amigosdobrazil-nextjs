@@ -27,12 +27,13 @@ module.exports = {
     'prettier/prettier': 'off',
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx', '.ts'] }],
     'import/prefer-default-export': 'off',
-    'no-console': ['error', { allow: ['tron'] }],
+    'no-console': ['error', { allow: ['error'] }],
     '@typescript-eslint/camelcase': 'off',
     'react/prop-types': 0,
     'react/jsx-props-no-spreading': 0,
     "import/no-extraneous-dependencies": 0,
-    'jsx-a11/click-events-have-key-events': 'off',
+    'jsx-a11/click-events-have-key-events': 0,
+    'eslint/no-underscore-dangle': 0,
   },
   settings: {
     'import/parsers': {

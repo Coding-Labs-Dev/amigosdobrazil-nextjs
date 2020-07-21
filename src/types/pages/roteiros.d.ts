@@ -1,4 +1,4 @@
-import { Trip } from '~/components/Trip/Trip';
+import { Trip } from '~/types/models';
 
 export interface Props {
   trips: Trip[];

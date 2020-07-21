@@ -34,8 +34,10 @@ const Input: React.FC<Props> = ({
             name={name}
             placeholder={placeholder}
             ref={ref => {
-              register(ref);
-              inputRef.push(ref);
+              if (ref) {
+                register(ref);
+                inputRef.push(ref);
+              }
             }}
           />
         )}
@@ -45,8 +47,10 @@ const Input: React.FC<Props> = ({
             name={name}
             placeholder={placeholder}
             ref={ref => {
-              register(ref);
-              inputRef.push(ref);
+              if (ref) {
+                register(ref);
+                inputRef.push(ref);
+              }
             }}
           />
         )}

@@ -1,10 +1,11 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 import { Container, Card, CardTitle, CardBody } from 'reactstrap';
 
 import { Props } from './Itinerary';
 
 import { Wrapper } from './styles';
-import DayInfo from '~/components/DayInfo';
+import DayInfo from '../DayInfo';
 
 const Itinerary: React.FC<Props> = ({ description, itinerary }) => (
   <Wrapper>

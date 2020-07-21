@@ -1,28 +1,21 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useState } from 'react';
 import {
   Container,
   Row,
   Col,
 } from 'reactstrap';
-import moment from 'moment';
 
-import { Props } from './Trip';
+import { Props, Context } from './Trip';
 
 import { Wrapper } from './styles';
-import TripBanner from '~/components/TripBanner';
-import TripInfoCard from '~/components/TripInfoCard';
-import Itinerary from '~/components/Itinerary';
-import TripSideBar from '~/components/TripSideBar';
-import PaymentPlans from '~/components/PaymentPlans';
+import TripBanner from '../TripBanner';
+import TripInfoCard from '../TripInfoCard';
+import Itinerary from '../Itinerary';
+import TripSideBar from '../TripSideBar';
+import PaymentPlans from '../PaymentPlans';
 
-const ctx: {
-  value: number | null;
-  setValue: Dispatch<SetStateAction<number>> | null;
-  refs: {
-    [key: number]: HTMLDivElement;
-  } | null;
-  setRefs: ((key: number, ref: HTMLDivElement) => void) | null;
-} = {
+const ctx: Context = {
   value: null,
   setValue: null,
   refs: null,
@@ -39,7 +32,7 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
     refs[key] = ref;
   };
 
-  const canBook = moment().isBetween(moment(trip.bookStart), moment(trip.bookEnd));
+
 
   return (
     <Wrapper>
@@ -72,11 +65,13 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
                 itinerary={trip.itinerary}
                 slug={trip.slug}
               />
-              {canBook && !!trip.paymentPlans.length && (
+              {trip.canBook && !!trip.paymentPlans.length && (
                 <PaymentPlans
+                  transportPlans={trip.transportPlans}
                   paymentPlans={trip.paymentPlans}
                   slug={trip.slug}
                   display="md"
+                  activePlanIndex={trip.activePlanIndex}
                 />
               )}
             </Col>
@@ -91,10 +86,12 @@ const Trip: React.FC<Props> = ({ trip, fowardRef, documents, includes }) => {
                 documents={documents}
                 itinerary={trip.itinerary}
               />
-              {canBook && !!trip.paymentPlans.length && (
+              {trip.canBook && !!trip.paymentPlans.length && (
                 <PaymentPlans
+                  transportPlans={trip.transportPlans}
                   paymentPlans={trip.paymentPlans}
                   slug={trip.slug}
+                  activePlanIndex={trip.activePlanIndex}
                 />
               )}
             </Col>

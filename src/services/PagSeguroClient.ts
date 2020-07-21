@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-underscore-dangle */
 export interface GetPaymentMethods {
   error: boolean | object;
   paymentMethods: object;
@@ -64,11 +66,11 @@ class PagSeguroClient {
     try {
       await (<any>window).PagSeguroDirectPayment.setSessionId(token);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
-  async getPaymentMethods(amount: number): Promise<any> {
+  async getPaymentMethods(amount?: number): Promise<any> {
     return new Promise((resolve, reject) => {
       (<any>window).PagSeguroDirectPayment.getPaymentMethods({
         amount,
@@ -121,7 +123,7 @@ class PagSeguroClient {
         maxInstallmentNoInterest,
         brand,
         success: (result: any) => resolve(result),
-        error: (error: any, message: any) => reject(error),
+        error: (error: any) => reject(error),
       });
     });
   }
@@ -135,7 +137,7 @@ class PagSeguroClient {
       }) => {
         if (response.status === 'error') reject(response.message);
         resolve(response.senderHash);
-      })
+      });
     });
   }
 }
