@@ -14,4 +14,9 @@ export const Wrapper = styled.div`
     text-transform: uppercase;
     padding: 0;
   }
+
+  .description {
+    text-align: left;
+    font-size: 0.9rem;
+  }
 `;

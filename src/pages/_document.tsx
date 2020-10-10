@@ -28,7 +28,7 @@ export default class MyDocument extends Document<Props> {
           <meta name="theme-color" content="#000000" />
           <meta
             name="description"
-            content="Web site created using create-react-app and CodingLabs Template"
+            content="Amigos do Brazil - Agência de Turismo"
           />
           <link rel="apple-touch-icon" href="/logo192.png" />
           <link rel="manifest" href="/manifest.json" />

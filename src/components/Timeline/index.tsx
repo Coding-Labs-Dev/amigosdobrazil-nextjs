@@ -40,7 +40,6 @@ const Timeline: React.FC<Props> = ({ mainDestinations }) => {
             <h6 className="font-weight-bold text-left my-0 py-0">
               {destination.mainDestinationTitle}
             </h6>
-            <span className="small">Dia {destination.order}</span>
           </li>
         ))}
       </ul>

@@ -35,47 +35,49 @@ const PaymentPlans: React.FC<Props> = ({
             <h1 className="paymentPlan-title">Planos de Pagamento</h1>
           </CardTitle>
           <CardBody>
+            {!!transportPlans.length && (
+              <h1 className="part-title">Parte Aérea</h1>
+            )}
             {transportPlans.map(plan => (
-              <>
-                <h1 className="part-title">Parte Aérea</h1>
-                <Card
-                  className="p-4 my-3 b-payment-plan border-primary b-payment-plan__active"
-                  key={`${display}_tansport_plan_${plan.id}`}
-                  style={{ borderWidth: 1 }}
-                >
-                  <Row>
-                    <Col xs={12} lg={8} className="align-items-stretch">
-                      <Row className="text-left h-100">
-                        <Col xs={1} className="my-auto pr-4">
-                          <FaCheckCircle size={20} className="text-primary" />
-                        </Col>
-                        <Col className="my-auto">
-                          <span className="font-weight-bold text-primary d-block">
-                            Classe econômica
-                          </span>
-                          <span className="font-weight-bold text-light d-block">
-                            {Number(plan.usd).toLocaleString('pt', {
-                              style: 'currency',
-                              currency: 'USD',
-                              currencyDisplay: 'symbol',
-                            })}
-                          </span>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col xs={12} lg={4} className="text-right my-auto">
-                      <span className="text-light small d-block">
-                        + Taxa de Embarque
-                      </span>
-                      <span className="text-light small d-block">
-                        Em até {plan.installmentsQty}x sem juros
-                      </span>
-                    </Col>
-                  </Row>
-                </Card>
-              </>
+              <Card
+                className="p-4 my-3 b-payment-plan border-primary b-payment-plan__active"
+                key={`${display}_tansport_plan_${plan.id}`}
+                style={{ borderWidth: 1 }}
+              >
+                <Row>
+                  <Col xs={12} lg={8} className="align-items-stretch">
+                    <Row className="text-left h-100">
+                      <Col xs={1} className="my-auto pr-4">
+                        <FaCheckCircle size={20} className="text-primary" />
+                      </Col>
+                      <Col className="my-auto">
+                        <span className="font-weight-bold text-primary d-block">
+                          Classe econômica
+                        </span>
+                        <span className="font-weight-bold text-light d-block">
+                          {Number(plan.usd).toLocaleString('pt', {
+                            style: 'currency',
+                            currency: 'USD',
+                            currencyDisplay: 'symbol',
+                          })}
+                        </span>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col xs={12} lg={4} className="text-right my-auto">
+                    <span className="text-light small d-block">
+                      + Taxa de Embarque
+                    </span>
+                    <span className="text-light small d-block">
+                      Em até {plan.installmentsQty}x sem juros
+                    </span>
+                  </Col>
+                </Row>
+              </Card>
             ))}
-            <h1 className={`part-title ${!!transportPlans.length && 'pt-4'}`}>Parte Terrestre</h1>
+            <h1 className={`part-title ${!!transportPlans.length && 'pt-4'}`}>
+              Parte Terrestre
+            </h1>
             {paymentPlans.map((plan, i) => {
               const active = i === activePlanIndex;
               return (
@@ -108,7 +110,8 @@ const PaymentPlans: React.FC<Props> = ({
                               active ? 'primary' : 'light'
                             } d-block`}
                           >
-                            Inscrição até{' '}
+                            Inscrição
+                            {i < paymentPlans.length - 1 ? ' até ' : ' após '}
                             {moment(plan.date).format('DD/MM/YYYY')}
                           </span>
                           <span className="font-weight-bold text-light d-block">

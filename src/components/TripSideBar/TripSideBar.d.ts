@@ -1,5 +1,5 @@
 export interface Props {
-  includes: { description: string }[];
+  includes: { description: string; included: boolean }[];
   documents: { description: string }[];
   itinerary: {
     title: string;

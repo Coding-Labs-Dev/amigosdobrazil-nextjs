@@ -26,7 +26,7 @@ const DayInfo: React.FC<Props> = ({ title, description, order }) => {
           <Row>
             <Col className="text-left pr-0" xs={10}>
               <span className="font-weight-bold text-left">
-                Dia {order} - {title}
+                {title}
               </span>
             </Col>
             <Col xs={2} className="pl-2">
@@ -39,7 +39,12 @@ const DayInfo: React.FC<Props> = ({ title, description, order }) => {
           </Row>
         </Container>
         <Collapse isOpen={value === order}>
-          <CardBody>{description}</CardBody>
+          <CardBody><div className="description"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: description,
+        }}
+      /></CardBody>
         </Collapse>
       </Card>
     </Wrapper>

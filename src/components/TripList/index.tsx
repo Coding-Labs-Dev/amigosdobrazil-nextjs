@@ -15,9 +15,7 @@ const TripList: React.FC<Props> = ({ type, items }) => {
       <ul>
         {items.map(item => (
           <li key={item.description} className="py-2">
-            <div className="p-2 d-inline-block">
               <Icon size={24} color={colors[type]} />
-            </div>
             <p className="d-inline">{item.description}</p>
           </li>
         ))}

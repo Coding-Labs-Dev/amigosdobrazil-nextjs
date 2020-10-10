@@ -1,2 +1,13 @@
-nextApp:
-  component: 'serverless-next.js'
+amigosdobrazil-prod:
+  component: "@sls-next/serverless-component@1.15.1"
+  inputs:
+    domain: ["amigosdobrazil.com.br"]
+    publicDirectoryCache:
+      value: public, max-age=604800
+      test: /\.(gif|jpe?g|jp2|tiff|png|webp|bmp|svg|ico)$/i
+    name:
+      defaultLambda: amigosDoBrazilDefaultLambda
+      apiLambda: amigosDoBrazilApiLambda
+    bucketName: "br-com-amigosdobrazil"
+    domainType: "apex"
+    verbose: true

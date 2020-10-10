@@ -144,15 +144,14 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
 
     const formData = dot.object({
       ...dataMethods.getValues(),
+      installments: { ...creditCardMethods.getValues('installments') },
       senderHash,
       creditCardToken,
     });
 
     try {
-      setTimeout(async () => {
-        await api.post(`/book/${trip.slug}`, formData);
-        setSuccess(true);
-      }, 4000);
+      await api.post(`/book/${trip.slug}`, formData);
+      setSuccess(true);
     } catch (error) {
       setSending(false);
       setPayError(error.message);
@@ -353,7 +352,7 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
               {sending && <Loader />}
               <Alert
                 color="danger"
-                isOpen={payError}
+                isOpen={!!payError}
                 className="align-items-center d-flex"
                 toggle={() => setPayError(false)}
               >

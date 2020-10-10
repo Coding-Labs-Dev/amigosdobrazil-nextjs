@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Card } from 'reactstrap';
 
-import { HeroData } from './Hero';
+import { Hero } from '~/types/models';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   align-items: stretch;
 `;
 
-export const Banner = styled(Card)<HeroData>`
+export const Banner = styled(Card)<Hero>`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: ${props => props.position};

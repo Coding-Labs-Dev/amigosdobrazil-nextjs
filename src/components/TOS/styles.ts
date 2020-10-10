@@ -27,6 +27,23 @@ export const Wrapper = styled.div`
       }
     }
 
+    .grid {
+      display: grid;
+      grid-template-columns: auto max-content;
+      padding: 10px 25px;
+      font-size: 0.9rem;
+      width: 100%;
+
+      & > div {
+        padding: 10px;
+        border-bottom: 1px solid #000;
+
+        &.header {
+          font-weight: 700;
+        }
+      }
+    }
+
     .date {
       padding: 20px 0;
       text-align: right;
