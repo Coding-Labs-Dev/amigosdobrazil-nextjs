@@ -4,21 +4,16 @@ export const MainNavigation = [
     baseURL: '/',
     path: 'home',
   },
-  // {
-  //   label: 'Quem somos',
-  //   baseURL: '/quemsomos',
-  //   path: '/quemsomos',
-  // },
   {
     label: 'Roteiros',
     baseURL: '/roteiros',
     path: 'roteiros',
   },
-  // {
-  //   label: 'Galeria',
-  //   baseURL: '/galeria',
-  //   path: '/galeria',
-  // },
+  {
+    label: 'Galeria',
+    baseURL: '/galeria',
+    path: 'galeria',
+  },
   {
     label: 'Seguro',
     baseURL: 'https://www.gtawlabel.com.br/brasiloriente',

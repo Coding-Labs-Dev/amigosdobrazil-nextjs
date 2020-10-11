@@ -6,9 +6,10 @@ export const Container = styled.div`
   height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 64px 0;
+  flex: auto;
 
   h5 {
     color: #2f3640;

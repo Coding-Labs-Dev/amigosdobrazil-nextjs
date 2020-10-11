@@ -6,8 +6,7 @@ import { Hero } from '~/types/models';
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
-  max-height: 640px;
+  height: 640px;
   display: flex;
   justify-content: center;
   align-items: stretch;

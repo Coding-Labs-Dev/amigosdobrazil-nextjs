@@ -14,6 +14,8 @@ export default createGlobalStyle`
 
   html, body, #__next {
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   body {

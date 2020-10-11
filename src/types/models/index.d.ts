@@ -47,7 +47,7 @@ export interface Trip {
     title: string;
     description: string;
   };
-  includes: { description: string, included: boolean }[];
+  includes: { description: string; included: boolean }[];
   documents: { description: string }[];
   itinerary: {
     title: string;
@@ -105,4 +105,16 @@ export interface Itinerary {
   order: number;
   mainDestination: boolean;
   mainDestinationTitle: string;
+}
+
+export interface Gallery {
+  id: number;
+  title: string;
+  slug: string;
+  photos: Array<{
+    id: number;
+    photo: {
+      url: string;
+    };
+  }>;
 }

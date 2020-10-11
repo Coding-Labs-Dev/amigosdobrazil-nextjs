@@ -64,7 +64,7 @@ export interface Props {
   };
   fowardRef: React.fowardRef;
   documents: { description: string }[];
-  includes: { description: string }[];
+  includes: { description: string, included: boolean }[];
   itinerary: {
     title: string;
     description: string;

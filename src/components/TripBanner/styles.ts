@@ -6,8 +6,7 @@ import { BackgroundData } from './Banner';
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  min-height: 640px;
-  max-height: 100%;
+  height: 640px;
   display: flex;
   justify-content: center;
   align-items: stretch;
