@@ -60,8 +60,7 @@ index.getInitialProps = async ({ pathname }) => {
   const { data: nextTrips } = await api.get('/nexttrips');
   const { data: whyUs } = await api.get('/whyus');
   const { data: testimonials } = await api.get('/testimonials');
-  const { data: settings } = await api.get('/settings');
-  return { heroes, nextTrips, whyUs, testimonials, settings, pathname };
+  return { heroes, nextTrips, whyUs, testimonials, pathname };
 };
 
 export default index;

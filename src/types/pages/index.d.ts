@@ -5,6 +5,6 @@ export interface Props {
   nextTrips: NextTrip[];
   whyUs: WhyUs[];
   testimonials: Testimonial[];
-  settings: Settings;
+  settings?: Settings;
   pathname: string;
 }

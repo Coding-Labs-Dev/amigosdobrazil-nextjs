@@ -72,7 +72,7 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
   const [payError, setPayError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [pagSeguroClient, setPagSeguroClient] = useState<
-    PagSeguroClient | undefined
+  PagSeguroClient | undefined
   >();
 
   useEffect(() => {
@@ -157,6 +157,8 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
       setPayError(error.message);
     }
   };
+
+  if (!settings) return null;
 
   return (
     <Wrapper className="align-items-stretch">
@@ -407,11 +409,10 @@ Reservar.getInitialProps = async ({
   try {
     const { data: tos } = await api.get('/tos');
     const { data: trip } = await api.get(`/trips/${query.slug}`);
-    const { data: settings } = await api.get('/settings');
 
     if (!trip.canBook) throw Error('This trip is not open for booking');
 
-    return { tos, trip, settings };
+    return { tos, trip };
   } catch (e) {
     if (res) {
       res.statusCode = 303;

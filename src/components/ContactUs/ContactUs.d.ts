@@ -8,5 +8,5 @@ export type FormSchema = {
 };
 
 export interface Props {
-  settings: Settings;
+  settings?: Settings;
 }

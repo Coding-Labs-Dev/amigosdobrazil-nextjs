@@ -4,9 +4,13 @@ import { useTheme } from 'styled-components';
 
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import { Wrapper } from './styles';
+import { Settings } from '~/types/models';
 
+interface Props {
+  settings: Settings;
+}
 
-const Footer = () => {
+const Footer: React.FC<Props> = ({ settings }) => {
   const theme = useTheme();
   return (
     <Wrapper fluid className="bg-dark">
@@ -36,16 +40,10 @@ const Footer = () => {
             className="third-col text-center p-4"
             style={{ color: theme.colors.gray600 }}
           >
-            <a
-              href="https://www.facebook.com/amigosdobrazil/"
-              className="px-2 text-light"
-            >
+            <a href={settings.facebook} className="px-2 text-light">
               <FaFacebook size={22} />
             </a>
-            <a
-              href="https://www.instagram.com/amigosdobrazil/"
-              className="px-2 text-light"
-            >
+            <a href={settings.instagram} className="px-2 text-light">
               <FaInstagram size={22} />
             </a>
           </Col>

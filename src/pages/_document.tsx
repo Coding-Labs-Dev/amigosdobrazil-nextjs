@@ -1,5 +1,6 @@
 import React from 'react';
 import Document, {
+  Html,
   Head,
   Main,
   NextScript,
@@ -21,7 +22,7 @@ export default class MyDocument extends Document<Props> {
 
   render() {
     return (
-      <html lang="pt">
+      <Html lang="pt">
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,7 +39,7 @@ export default class MyDocument extends Document<Props> {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

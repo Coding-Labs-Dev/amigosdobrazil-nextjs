@@ -58,6 +58,9 @@ const ContactUs: React.FC<Props> = ({ settings }) => {
       setIsSending(false);
     }
   });
+
+  if (!settings) return null;
+
   return (
     <Wrapper fluid className="py-5" id="contato">
       <Container>

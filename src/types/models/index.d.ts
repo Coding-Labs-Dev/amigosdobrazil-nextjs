@@ -72,6 +72,8 @@ export interface Settings {
   altPhone?: string;
   maxInstallments: number;
   maxNoInterestInstallments: number;
+  facebook: string;
+  instagram: string;
 }
 
 export interface Hero {
