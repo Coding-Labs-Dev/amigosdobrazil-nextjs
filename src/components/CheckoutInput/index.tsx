@@ -1,7 +1,8 @@
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { Col } from 'reactstrap';
 import { FaExclamationCircle } from 'react-icons/fa';
+import ReactInputMask from 'react-input-mask';
 import Select from '../SelectInput';
 
 import { Props } from './CheckoutInput';
@@ -10,6 +11,7 @@ import { Wrapper, Container, ErrorMsg } from './styles';
 const Input: React.FC<Props> = ({
   name,
   type = 'text',
+  mask = '',
   options,
   defaultValue,
   placeholder,
@@ -23,31 +25,15 @@ const Input: React.FC<Props> = ({
   maxLength,
   disabled,
 }) => {
-  const inputRef: Array<
-  ((HTMLInputElement | null) | (HTMLTextAreaElement | null)) | null
-  > = [];
-
-  const { register, setValue, errors } = useFormContext();
-
-  function handleClick() {
-    inputRef[0]?.focus();
-  }
-
+  const { register, errors, control } = useFormContext();
   if (type === 'hidden') {
-    register({ name, type: 'hidden' });
-
-    React.useEffect(() => {
-      setValue(name, value);
-    }, [value]);
-
-    return null;
+    return <input type="hidden" name={name} ref={register} value={value} />;
   }
 
   return (
     <Wrapper className="px-0" {...size} disabled={disabled}>
       <Col xs={12} className="px-1">
         <Container
-          onClick={handleClick}
           error={errors[name]}
           className={`border rounded px-2 py-1 my-2 w-100 ${!!errors[name] &&
             'border-danger'}`}
@@ -63,19 +49,17 @@ const Input: React.FC<Props> = ({
             )}
           </div>
           {type !== 'select' ? (
-            <input
-              type={type === 'text' ? 'text' : 'tel'}
+            <Controller
+              control={control}
+              as={ReactInputMask}
+              type={type}
               name={name}
+              defaultValue={defaultValue}
               placeholder={placeholder}
-              ref={ref => {
-                if(ref) {
-                  register(ref);
-                  inputRef.push(ref);
-                }
-              }}
               onFocus={onFocus}
               maxLength={maxLength}
               disabled={disabled}
+              mask={mask}
             />
           ) : (
             <div className="select-container">

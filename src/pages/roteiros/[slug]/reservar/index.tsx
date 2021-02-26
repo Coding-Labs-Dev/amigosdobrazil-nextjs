@@ -72,7 +72,7 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
   const [payError, setPayError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [pagSeguroClient, setPagSeguroClient] = useState<
-  PagSeguroClient | undefined
+    PagSeguroClient | undefined
   >();
 
   useEffect(() => {
@@ -132,29 +132,33 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
     setSending(true);
     if (!pagSeguroClient) return;
 
-    const creditCardToken = await pagSeguroClient.getCreditCardToken({
-      cardNumber: creditCard.creditCardNumber,
-      brand: creditCard.brand,
-      cvv: creditCard.cvv,
-      expirationMonth: creditCard.expDate.split('/')[0],
-      expirationYear: `20${creditCard.expDate.split('/')[1]}`,
-    });
-
-    const senderHash = await pagSeguroClient.getSenderHash();
-
-    const formData = dot.object({
-      ...dataMethods.getValues(),
-      installments: { ...creditCardMethods.getValues('installments') },
-      senderHash,
-      creditCardToken,
-    });
-
     try {
+      const creditCardToken = await pagSeguroClient.getCreditCardToken({
+        cardNumber: creditCard.creditCardNumber,
+        brand: creditCard.brand,
+        cvv: creditCard.cvv,
+        expirationMonth: creditCard.expDate.split('/')[0],
+        expirationYear: `20${creditCard.expDate.split('/')[1]}`,
+      });
+
+      const senderHash = await pagSeguroClient.getSenderHash();
+
+      const formData = dot.object({
+        ...dataMethods.getValues(),
+        installments: { ...creditCardMethods.getValues('installments') },
+        senderHash,
+        creditCardToken,
+      });
+
       await api.post(`/book/${trip.slug}`, formData);
       setSuccess(true);
     } catch (error) {
+      if (error.response?.data?.error?.message) {
+        setPayError(error.response?.data?.error?.message);
+      } else {
+        setPayError(error.message || 'Houve um erro ao processar o pagamento');
+      }
       setSending(false);
-      setPayError(error.message);
     }
   };
 
@@ -205,6 +209,8 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
                                 type={field?.type}
                                 size={field.size}
                                 required={field.required}
+                                mask={field.mask}
+                                maxLength={field.maxLength}
                               />
                             ))}
                           </Row>
@@ -223,6 +229,8 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
                                 type={field?.type}
                                 size={field.size}
                                 required={field.required}
+                                mask={field.mask}
+                                maxLength={field.maxLength}
                               />
                             ))}
                           </Row>
@@ -252,6 +260,8 @@ const Reservar: NextPage<Props | undefined> = ({ tos, trip, settings }) => {
                                   type={field?.type}
                                   size={field.size}
                                   required={field.required}
+                                  mask={field.mask}
+                                  maxLength={field.maxLength}
                                 />
                               ))}
                             </Row>

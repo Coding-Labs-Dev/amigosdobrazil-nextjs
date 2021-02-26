@@ -26,7 +26,8 @@ const fields: InputProps[] = [
     placeholder: 'DD/AA',
     label: 'Data de Expiração',
     required: true,
-    type: 'number',
+    type: 'tel',
+    mask: '99/99',
     size: {
       xs: 6,
       md: 5,
@@ -207,6 +208,7 @@ const CreditCardCheckout: React.FC<Props> = ({
               size={field.size}
               required={field.required}
               onFocus={setFocus}
+              mask={field.mask}
               maxLength={
                 field.name === 'creditCardNumber' ? maxLength : undefined
               }

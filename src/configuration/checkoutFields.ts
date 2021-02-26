@@ -94,7 +94,8 @@ export const personalData: Props[] = [
     placeholder: 'Digite o seu CPF',
     name: 'cpf',
     required: true,
-    type: 'number',
+    type: 'tel',
+    mask: '999.999.999-99',
     size: {
       md: 6,
       lg: 3,
@@ -113,6 +114,7 @@ export const personalData: Props[] = [
   {
     label: 'Data de Nascimento',
     placeholder: 'DD/MM/AAAA',
+    mask: '99/99/9999',
     name: 'dob',
     required: true,
     size: {
@@ -160,8 +162,9 @@ export const personalData: Props[] = [
   {
     label: 'Telefone Fixo',
     placeholder: '(00) 0000-0000',
+    mask: '(99) 9999-9999',
     name: 'phone',
-    type: 'number',
+    type: 'tel',
     size: {
       md: 3,
     },
@@ -169,8 +172,9 @@ export const personalData: Props[] = [
   {
     label: 'Telefone Celular',
     placeholder: '(00) 00000-0000',
+    mask: '(99) 99999-9999',
     name: 'mobile',
-    type: 'number',
+    type: 'tel',
     required: true,
     size: {
       md: 3,
@@ -235,6 +239,7 @@ export const residentialAddress: Props[] = [
     placeholder: 'Digite o estado',
     name: 'address_residential_district',
     required: true,
+    maxLength: 2,
     size: {
       md: 4,
       lg: 2,
@@ -243,9 +248,10 @@ export const residentialAddress: Props[] = [
   {
     label: 'CEP',
     placeholder: 'Digite o CEP',
+    mask: '99999-999',
     name: 'address_residential_zip',
     required: true,
-    type: 'number',
+    type: 'tel',
     size: {
       md: 4,
       lg: 2,
@@ -303,6 +309,7 @@ export const commercialAddress: Props[] = [
   {
     label: 'Estado',
     placeholder: 'Digite o estado',
+    maxLength: 2,
     name: 'address_commercial_district',
     size: {
       md: 4,
@@ -312,47 +319,12 @@ export const commercialAddress: Props[] = [
   {
     label: 'CEP',
     placeholder: 'Digite o CEP',
+    mask: '99999-999',
     name: 'address_commercial_zip',
-    type: 'number',
+    type: 'tel',
     size: {
       md: 4,
       lg: 2,
     },
   },
 ];
-
-// export const ParseCheckoutFields = async (
-//   checkoutData: CheckoutData
-// ): ParsedCheckoutData => {
-//   const creditCardToken = '';
-//   const creditCard = {
-//     token: creditCardToken,
-//     installment: {
-//       quantity:
-//     }
-//   };
-//   const sender = {
-//     hash: '',
-//     name: checkoutData.name,
-//     email: checkoutData.email,
-//     phone: {
-//       areaCode: checkoutData.mobile.substr(0, 2),
-//       phone: checkoutData.mobile.substr(2),
-//     },
-//     documents: {
-//       document: {
-//         type: 'CPF',
-//         value: checkoutData.cpf,
-//       },
-//     },
-//   };
-
-//   return {
-//     reference: 'AMIGOS-DO-BRAZIL',
-
-//     sender,
-//     shipping: {
-//       addressRequired: false,
-//     }
-//   }
-// };

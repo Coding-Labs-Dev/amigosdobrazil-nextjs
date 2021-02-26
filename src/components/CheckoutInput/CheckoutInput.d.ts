@@ -1,6 +1,7 @@
 export interface Props {
   name: string;
-  type?: 'text' | 'number' | 'select' | 'hidden';
+  type?: 'text' | 'number' | 'tel' | 'select' | 'hidden';
+  mask?: string | Array<string | RegExp>;
   value?: string;
   options?: {
     value?: string;
@@ -47,7 +48,7 @@ export interface CreditCardFormData {
       installmentAmount: number;
       totalAmount: number;
       interestFree: boolean;
-    }
+    };
     value: string;
     label: string;
   };

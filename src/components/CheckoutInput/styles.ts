@@ -42,7 +42,6 @@ export const Wrapper = styled(Col)`
 `;
 
 export const Container = styled.div<ContainerProps>`
-  cursor: text;
   div.content {
     display: flex;
   }
