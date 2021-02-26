@@ -104,7 +104,7 @@ const CreditCardCheckout: React.FC<Props> = ({
             quantity,
             installmentAmount,
             totalAmount,
-            interestFree: true,
+            interestFree: false,
           },
           value: String(quantity),
           label: `${quantity} x ${Number(installmentAmount).toLocaleString(
